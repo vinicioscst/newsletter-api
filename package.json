@@ -1,0 +1,18 @@
+{
+  "name": "newsletter-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon ./http/server.js",
+    "start": "node ./http/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.11.4",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.27.0"
+  }
+}
