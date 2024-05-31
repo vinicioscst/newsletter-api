@@ -187,5 +187,3 @@ Exemplo de retorno:
 ```
 
 </details>
-
-## Altera
