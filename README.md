@@ -2,8 +2,8 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/Javascript-yellow?logo=javascript&logoColor=f5f5f5" alt="Linguagem">
-    <img src="https://img.shields.io/badge/Node.js%2020.11.1-5FA04E?logo=
-Node.js&logoColor=f5f5f5" alt="Runtime">
+    <img src="https://img.shields.io/badge/Node%2Ejs%2020%2E11%2E1-5FA04E?logo=
+Node%2Ejs&logoColor=f5f5f5" alt="Runtime">
     <img src="https://img.shields.io/badge/In%20Progress-blue" alt="Progresso">
 </p>
 
