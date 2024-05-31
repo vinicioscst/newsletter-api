@@ -10,7 +10,7 @@ fastify.get("/api/articles", async function (_, reply) {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const prompt = `Colete as notícias mais importantes do dia de hoje no Brasil e me devolva as 15 primeiras. Devolva apenas notícias reais e de portais e jornais relevantes.
+    const prompt = `Colete as notícias mais importantes do dia de hoje, ${new Date()}, no Brasil e me devolva as 15 primeiras. Devolva apenas notícias reais e de portais e jornais relevantes.
     A reposta precisa estar como um array de objetos em Javascript transformado em string através do método stringify do JSON, tendo os objetos os seguintes campos:
     - title (O nome da matéria)
     - description (Me devolva o subtítulo da matéria. Se não houver, preencha com null)
