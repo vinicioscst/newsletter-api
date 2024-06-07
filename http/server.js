@@ -4,28 +4,22 @@ import Fastify from "fastify";
 
 const fastify = Fastify();
 
+
+// uma rota para noticias
+// uma rota para imagens das noticias
+
 fastify.get("/api/articles", async function (_, reply) {
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-
-  const todayDate = new Date();
-  const lastWeekDate = new Date();
-  lastWeekDate.setDate(todayDate.getDate() - 7);
-  const today = `${todayDate.getDate()}-${
-    todayDate.getMonth() + 1
-  }-${todayDate.getFullYear()}`;
-  const lastWeek = `${lastWeekDate.getDate()}-${
-    lastWeekDate.getMonth() + 1
-  }-${lastWeekDate.getFullYear()}`;
 
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const prompt = `Colete no Google Notícias as notícias mais importantes do Brasil publicadas de ${lastWeek} a ${today} me devolva as 15 primeiras. Responda com notícias reais e listadas como um array de objetos (as notícias) no Javascript, tendo os objetos os seguintes campos:
+    const prompt = `Me mostre as 15 notícias mais importantes do Brasil dos últimos 7 dias. Retorne as notícias em um array de objetos tendo os seguintes campos:
     - title (O nome da matéria)
     - description (Me devolva o subtítulo da matéria. Se não houver, preencha com null)
     - publishedAt (A data da publicação no formato ISO)
     - source (O nome do site onde a matéria foi veiculada)
-    - url (O link da matéria)
+    - url (O link da matéria)s
     - image (A imagem utilizada na matéria)`;
 
     const result = await model.generateContent(prompt);
