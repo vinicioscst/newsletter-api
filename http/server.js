@@ -1,8 +1,12 @@
 import "dotenv/config";
+import cors from "@fastify/cors";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Fastify from "fastify";
 
 const fastify = Fastify();
+await fastify.register(cors, {
+  origin: ["http://localhost:8000", "https://newsletter-vue.vercel.app/"],
+});
 
 fastify.get("/api/articles", async function (_, reply) {
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
