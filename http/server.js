@@ -5,7 +5,7 @@ import Fastify from "fastify";
 
 const fastify = Fastify();
 await fastify.register(cors, {
-  origin: ["http://localhost:8000", "https://newsletter-vue.vercel.app/"],
+  origin: ["http://localhost:8000", "https://newsletter-vue.vercel.app"],
 });
 
 fastify.get("/api/articles", async function (_, reply) {
