@@ -25,7 +25,11 @@ fastify.get("/api/articles", async function (_, reply) {
     const result = await model.generateContent(prompt);
     const articles = result.response.text();
 
-    reply.send(articles);
+    const formatted = JSON.parse(
+      articles.split("```")[1].slice(4, articles.length)
+    );
+    console.log(typeof formatted);
+    reply.send({ type: typeof formatted, response: formatted });
   } catch (error) {
     console.log(error);
   }
