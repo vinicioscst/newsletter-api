@@ -5,8 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon ./http/server.js",
-    "start": "node ./http/server.js"
+    "dev": "tsx watch ./src/config/server.ts",
+    "start": "node ./src/config/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
-    "nodemon": "^3.1.3",
+    "tsx": "^4.15.7",
     "typescript": "^5.5.2"
   }
 }
