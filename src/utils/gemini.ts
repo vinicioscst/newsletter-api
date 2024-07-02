@@ -13,8 +13,8 @@ async function generateArticles() {
     - headline (A chamada da notícia)
     - publishedAt (A data da publicação no formato ISO)
     - source (O nome do site onde a notícia foi veiculada)
-    - url (O link da notícia)
-    - image (O link da imagem da notícia)
+    - url (O link de referência da notícia)
+    - image (O link da imagem da referência da notícia)
     `;
 
     const result = await model.generateContent(prompt);
