@@ -2,8 +2,8 @@ import { Article } from "../classes/article.js";
 
 let articles: Article[] = [];
 
-function rewriteArticles(value: Article[]): Article[] {
-  const valueToArticles = value.map(
+function rewriteArticles(payload: Article[]): Article[] {
+  const payloadToArticles = payload.map(
     (article) =>
       new Article(
         article.id,
@@ -16,7 +16,7 @@ function rewriteArticles(value: Article[]): Article[] {
       )
   );
 
-  articles = valueToArticles;
+  articles = payloadToArticles;
   return articles;
 }
 
