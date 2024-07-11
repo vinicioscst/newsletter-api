@@ -18,15 +18,18 @@ async function getArticlesService(topic: string) {
   return articles;
 }
 
-async function getArticlesImagesService(articles: Article[]) {
-  const formattedArticles = articles.map(async (article) => {
+async function getArticlesImagesService(payload: Article[]) {
+  const adjustedArticlesPromises = payload.map(async (article) => {
     return {
       ...article,
       image: await validateImageURL(article.image, article.topic),
     };
   });
 
-  return formattedArticles;
+  const adjustedArticles = await Promise.all(adjustedArticlesPromises);
+  const articles = rewriteArticles(adjustedArticles);
+
+  return articles;
 }
 
 export { getArticlesService, getArticlesImagesService };
