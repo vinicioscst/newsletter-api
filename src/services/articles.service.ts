@@ -7,7 +7,7 @@ import { parseXML } from "../utils/parseXML.js";
 import { defineEndpoint } from "../utils/defineEndpoint.js";
 import { rewriteArticles } from "../utils/variables.js";
 
-async function getArticlesService(topic: string) {
+async function getArticlesService(topic: string): Promise<Article[]> {
   const apiUrl = defineEndpoint(topic);
   const xmlData = await getXMLData(apiUrl);
   const parsedData = await parseXML(xmlData);
@@ -18,7 +18,7 @@ async function getArticlesService(topic: string) {
   return articles;
 }
 
-async function getArticlesImagesService(payload: Article[]) {
+async function getArticlesImagesService(payload: Article[]): Promise<Article[]> {
   const adjustedArticlesPromises = payload.map(async (article) => {
     return {
       ...article,
