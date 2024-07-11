@@ -1,12 +1,16 @@
-import { Article } from "../model/article.js";
+import { Article } from "../classes/article.js";
+import { AppError } from "../errors/appError.js";
 
-function formatResponse(response: string): Article[] {
+function formatGeminiResponse(response: string): Article[] {
   const regex = /\[(.*?)\]/s;
-  const format = regex.exec(response);
+  try {
+    const format = regex.exec(response);
+    if (format === null) throw new Error();
 
-  if (format) return JSON.parse(format[0]);
-
-  throw Error("Não foi possível formatar a resposta");
+    return JSON.parse(format[0]);
+  } catch (error) {
+    throw new AppError("Was not possible to format response", 500);
+  }
 }
 
-export { formatResponse };
+export { formatGeminiResponse };

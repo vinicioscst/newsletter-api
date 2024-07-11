@@ -5,7 +5,6 @@ class Article {
     id: UUID,
     title: string,
     topic: string,
-    headline: string,
     publishedAt: Date,
     source: string,
     url: string,
@@ -14,7 +13,6 @@ class Article {
     this.id = id;
     this.title = title;
     this.topic = topic;
-    this.headline = headline;
     this.publishedAt = publishedAt;
     this.source = source;
     this.url = url;
@@ -24,7 +22,6 @@ class Article {
   id: UUID;
   title: string;
   topic: string;
-  headline: string;
   publishedAt: Date;
   source: string;
   url: string;
