@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx watch ./src/config/server.ts",
-    "start": "node ./src/config/server.js"
+    "start": "node ./dist/config/server.js"
   },
   "author": "",
   "license": "ISC",
