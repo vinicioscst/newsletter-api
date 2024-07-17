@@ -30,8 +30,4 @@ interface IError {
   error: string;
 }
 
-interface RequestQuery {
-  topic: string;
-}
-
-export { IResponseArticle, IError, RequestQuery };
+export { IResponseArticle, IError };
