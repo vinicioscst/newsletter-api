@@ -43,6 +43,7 @@ const UserResponseSchema = userSchema.omit({
 
 type TUserCreate = z.infer<typeof userCreateSchema>;
 type TUserLogin = z.infer<typeof userLoginSchema>;
+type TUserCreateResponse = z.infer<typeof UserResponseSchema>;
 
 export {
   userCreateSchema,
@@ -50,4 +51,5 @@ export {
   UserResponseSchema,
   TUserCreate,
   TUserLogin,
+  TUserCreateResponse,
 };

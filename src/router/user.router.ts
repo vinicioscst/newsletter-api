@@ -10,7 +10,7 @@ export class UserRouter extends BaseRouter<UserController> {
     super(UserController);
   }
 
-  routes() {
+  routes(): void {
     this.router.post(
       "/user/create",
       validateRequestBody(userCreateSchema),

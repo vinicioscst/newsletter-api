@@ -8,10 +8,14 @@ export class UserController {
     this.service = new UserService();
   }
 
-  async createUser(req: Request, res: Response, next: NextFunction) {
+  async createUser(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | undefined> {
     try {
       const user = await this.service.create(req.body);
-      res.status(201).json(user);
+      return res.status(201).json(user);
     } catch (error) {
       next(error);
     }
