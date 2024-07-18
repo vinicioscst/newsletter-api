@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { prisma } from "../database/prisma/prismaClient.js";
 import { searchForEmail } from "../helpers/searchForEmail.js";
 
-export async function verifyIfEmailIsUnique(
+export async function verifyUserByEmail(
   req: Request,
   res: Response,
   next: NextFunction
