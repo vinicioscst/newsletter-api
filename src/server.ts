@@ -5,6 +5,7 @@ import { ArticleRouter } from "./router/article.router.js";
 import { errorHandler } from "./helpers/errors/errorHandler.js";
 import { prisma } from "./database/prisma/prismaClient.js";
 import { UserRouter } from "./router/user.router.js";
+import { LoginRouter } from "./router/login.router.js";
 
 class ServerBootstrap {
   public app: express.Application = express();
@@ -34,7 +35,11 @@ class ServerBootstrap {
   }
 
   private routers(): Router[] {
-    return [new ArticleRouter().router, new UserRouter().router];
+    return [
+      new ArticleRouter().router,
+      new UserRouter().router,
+      new LoginRouter().router,
+    ];
   }
 
   public listen() {
