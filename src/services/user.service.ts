@@ -18,6 +18,11 @@ export class UserService {
       return UserResponseSchema.parse(user);
     } catch (error) {
       console.log(error);
+
+      if (error instanceof AppError) {
+        throw new AppError(error.message, error.status);
+      }
+
       throw new AppError("Was not possible to create an user", 500);
     }
   }
