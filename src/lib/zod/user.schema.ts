@@ -41,6 +41,7 @@ const UserResponseSchema = userSchema.omit({
   password: true,
 });
 
+type TUser = z.infer<typeof userSchema>;
 type TUserCreate = z.infer<typeof userCreateSchema>;
 type TUserLogin = z.infer<typeof userLoginSchema>;
 type TUserCreateResponse = z.infer<typeof UserResponseSchema>;
@@ -49,6 +50,7 @@ export {
   userCreateSchema,
   userLoginSchema,
   UserResponseSchema,
+  TUser,
   TUserCreate,
   TUserLogin,
   TUserCreateResponse,
