@@ -35,7 +35,13 @@ const userLoginSchema = z.object({
   password: z.string({ required_error: "Password field is mandatory" }),
 });
 
+const userEditSchema = userCreateSchema.partial();
+
 const UserResponseSchema = userSchema.omit({
+  password: true,
+});
+
+const UserCreateResponseSchema = userSchema.omit({
   name: true,
   email: true,
   password: true,
@@ -44,14 +50,20 @@ const UserResponseSchema = userSchema.omit({
 type TUser = z.infer<typeof userSchema>;
 type TUserCreate = z.infer<typeof userCreateSchema>;
 type TUserLogin = z.infer<typeof userLoginSchema>;
-type TUserCreateResponse = z.infer<typeof UserResponseSchema>;
+type TUserEdit = z.infer<typeof userEditSchema>;
+type TUserResponse = z.infer<typeof UserResponseSchema>;
+type TUserCreateResponse = z.infer<typeof UserCreateResponseSchema>;
 
 export {
   userCreateSchema,
   userLoginSchema,
+  userEditSchema,
   UserResponseSchema,
+  UserCreateResponseSchema,
   TUser,
   TUserCreate,
   TUserLogin,
+  TUserEdit,
+  TUserResponse,
   TUserCreateResponse,
 };
