@@ -34,6 +34,4 @@ export class LoginService {
       throw new AppError("Was not possible to log in", 500);
     }
   }
-
-  update() {}
 }
