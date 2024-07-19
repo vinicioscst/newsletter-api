@@ -1,4 +1,4 @@
-import { hash } from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { prisma } from "../database/prisma/prismaClient.js";
 import { AppError } from "../helpers/errors/appError.js";
 import {
@@ -14,7 +14,7 @@ export class UserService {
   constructor() {}
 
   async create(payload: TUserCreate): Promise<TUserCreateResponse> {
-    payload.password = await hash(payload.password, 13);
+    payload.password = await bcryptjs.hash(payload.password, 13);
 
     try {
       const user = await prisma.user.create({ data: payload });

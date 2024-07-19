@@ -1,4 +1,4 @@
-import { compare } from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { AppError } from "../helpers/errors/appError.js";
 import { searchForEmail } from "../helpers/searchForEmail.js";
 import { TUser, TUserLogin } from "../lib/zod/user.schema.js";
@@ -12,7 +12,10 @@ export class LoginService {
       const user: TUser | null = await searchForEmail(payload.email);
       if (!user) throw new AppError("Invalid credentials", 401);
 
-      const passwordsMatch = await compare(payload.password, user.password);
+      const passwordsMatch = await bcryptjs.compare(
+        payload.password,
+        user.password
+      );
       if (!passwordsMatch) throw new AppError("Invalid credentials", 401);
 
       const token: string = jsonwebtoken.sign(
