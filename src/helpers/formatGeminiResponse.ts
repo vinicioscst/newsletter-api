@@ -1,7 +1,7 @@
-import { Article } from "../classes/article.js";
-import { AppError } from "../errors/appError.js";
+import { TArticleFormat } from "../lib/zod/article.schema.js";
+import { AppError } from "./errors/appError.js";
 
-function formatGeminiResponse(response: string): Article[] {
+export function formatGeminiResponse(response: string): TArticleFormat[] {
   const regex = /\[(.*?)\]/s;
   try {
     const format = regex.exec(response);
@@ -12,5 +12,3 @@ function formatGeminiResponse(response: string): Article[] {
     throw new AppError("Was not possible to format response", 500);
   }
 }
-
-export { formatGeminiResponse };

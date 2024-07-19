@@ -14,8 +14,8 @@ model Article {
   subtopic    String    @db.VarChar(50)
   publishedAt DateTime? @default(now())
   source      String    @db.VarChar(50)
-  url         String    @db.VarChar(255)
-  image       String?   @db.VarChar(255)
+  url         String    
+  image       String?   
   userId      String
   User        User      @relation(fields: [userId], references: [id])
 }

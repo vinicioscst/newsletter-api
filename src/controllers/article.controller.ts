@@ -1,19 +1,22 @@
-import { Request, Response } from "express";
-import {
-  getArticlesService,
-  getArticlesImagesService,
-} from "../services/articles.service.js";
-import { articles } from "../utils/variables.js";
+import { NextFunction, Request, Response } from "express";
+import { ArticleService } from "../services/article.service.js";
 
 export class ArticleController {
-  async getArticles(req: Request, res: Response) {
-    const { topic } = req.query;
-    const articles = await getArticlesService(topic as string);
-    res.status(201).json(articles);
+  private service: ArticleService;
+  constructor() {
+    this.service = new ArticleService();
   }
 
-  async getArticlesWithFormattedImages(req: Request, res: Response) {
-    const formattedArticles = await getArticlesImagesService(articles);
-    res.status(200).json(formattedArticles);
+  async create(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { topic } = req.query;
+      const { id } = res.locals;
+
+      const articles = await this.service.create(topic as string, id);
+
+      res.status(201).json(articles);
+    } catch (error) {
+      next(error);
+    }
   }
 }

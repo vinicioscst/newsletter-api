@@ -1,4 +1,4 @@
-function defineEndpoint(topic: string): string {
+export function defineEndpoint(topic: string): string {
   switch (topic) {
     case "tech":
       return "http://tecnologia.uol.com.br/ultnot/index.xml";
@@ -26,5 +26,3 @@ function defineEndpoint(topic: string): string {
       break;
   }
 }
-
-export { defineEndpoint };

@@ -1,11 +1,11 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { IResponseArticle } from "../interfaces/interfaces.js";
-import { AppError } from "../errors/appError.js";
+import { AppError } from "./errors/appError.js";
+import { IResponseArticle } from "../types/xmlResponse.js";
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-async function standardizeData(
+export async function standardizeData(
   responseArray: IResponseArticle[]
 ): Promise<string> {
   try {
@@ -14,7 +14,8 @@ async function standardizeData(
     - id (Generate a UUID type id)
     - title (The news headline, using UTF-8 charset)
     - topic (The news main subject. Must be in Portuguese)
-    - publishedAt (The publication date)
+    - subtopic (Related to the main subject. Example: E-Sports is a subtopic of Games. Must be in Portuguese)
+    - publishedAt (The publication date in ISO format)
     - source (The name of the website where the news was published)
     - url (The news reference link)
     - image (The news reference image link. Sometimes available on description field)
@@ -32,5 +33,3 @@ async function standardizeData(
     throw new AppError("Was not possible to collect response fields", 500);
   }
 }
-
-export { standardizeData };
