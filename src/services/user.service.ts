@@ -1,4 +1,4 @@
-import { hash } from "bcrypt";
+import { hash } from "bcryptjs";
 import { prisma } from "../database/prisma/prismaClient.js";
 import { AppError } from "../helpers/errors/appError.js";
 import {

@@ -1,4 +1,4 @@
-import { compare } from "bcrypt";
+import { compare } from "bcryptjs";
 import { AppError } from "../helpers/errors/appError.js";
 import { searchForEmail } from "../helpers/searchForEmail.js";
 import { TUser, TUserLogin } from "../lib/zod/user.schema.js";
