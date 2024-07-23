@@ -12,18 +12,22 @@ model Article {
   title       String    @db.VarChar(255)
   topic       String    @db.VarChar(50)
   subtopic    String    @db.VarChar(50)
-  publishedAt DateTime? @default(now())
+  publishedAt DateTime? 
   source      String    @db.VarChar(50)
   url         String    
   image       String?   
   userId      String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   User        User      @relation(fields: [userId], references: [id])
 }
 
 model User {
-  id       String    @id @default(uuid())
-  name     String    @db.VarChar(50)
-  email    String    @unique @db.VarChar(50)
-  password String    @db.VarChar(60)
+  id          String    @id @default(uuid())
+  name        String    @db.VarChar(50)
+  email       String    @unique @db.VarChar(50)
+  password    String    @db.VarChar(60)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   Article  Article[]
 }
