@@ -6,8 +6,10 @@ import { defineEndpoint } from "../helpers/defineEndpoint.js";
 import { validateImageURL } from "../helpers/validateImageURL.js";
 import { prisma } from "../database/prisma/prismaClient.js";
 import { includeUserId } from "../helpers/includeUserId.js";
-import { articleCreateSchema } from "../lib/zod/article.schema.js";
+import { articleArraySchema, TArticleEdit } from "../lib/zod/article.schema.js";
 import { AppError } from "../helpers/errors/appError.js";
+import { IPaginationParams, IPaginationResponse } from "../types/pagination.js";
+import { createQueryPagination } from "../helpers/createQueryPagination.js";
 
 export class ArticleService {
   constructor() {}
@@ -30,6 +32,77 @@ export class ArticleService {
       });
 
       return articles;
+    } catch (error) {
+      console.log(error);
+
+      if (error instanceof AppError) {
+        throw new AppError(error.message, error.status);
+      }
+    }
+  }
+
+  async read(
+    userId: string,
+    { page, perPage }: IPaginationParams
+  ): Promise<IPaginationResponse | undefined> {
+    try {
+      const { skip, take } = createQueryPagination(page, perPage);
+      const [articles, count] = await prisma.$transaction([
+        prisma.article.findMany({
+          where: {
+            userId,
+          },
+          skip,
+          take,
+        }),
+        prisma.article.count({
+          where: {
+            userId,
+          },
+        }),
+      ]);
+
+      return {
+        prevPage: page <= 1 ? null : page - 1,
+        nextPage: count - (page - 1) * perPage <= perPage ? null : page + 1,
+        count,
+        articles: articleArraySchema.parse(articles),
+      };
+    } catch (error) {
+      console.log(error);
+
+      if (error instanceof AppError) {
+        throw new AppError(error.message, error.status);
+      }
+    }
+  }
+
+  async update(articleId: string, payload: TArticleEdit) {
+    try {
+      const editedArticle = prisma.article.update({
+        where: {
+          id: articleId,
+        },
+        data: payload,
+      });
+
+      return editedArticle;
+    } catch (error) {
+      console.log(error);
+
+      if (error instanceof AppError) {
+        throw new AppError(error.message, error.status);
+      }
+    }
+  }
+
+  async delete(articleId: string) {
+    try {
+      return await prisma.article.delete({
+        where: {
+          id: articleId,
+        },
+      });
     } catch (error) {
       console.log(error);
 

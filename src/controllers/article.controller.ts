@@ -19,4 +19,42 @@ export class ArticleController {
       next(error);
     }
   }
+
+  async read(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { pagination } = res.locals;
+      const { id } = req.params;
+
+      const articles = await this.service.read(id, pagination);
+
+      res.status(200).json(articles);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async update(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { body } = req;
+      const { id } = req.params;
+
+      const article = await this.service.update(id, body);
+
+      res.status(200).json(article);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async delete(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+
+      await this.service.delete(id);
+
+      res.status(204).json();
+    } catch (error) {
+      next(error);
+    }
+  }
 }
