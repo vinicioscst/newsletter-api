@@ -22,7 +22,7 @@ export async function validateToken(
         decoded: string | jsonwebtoken.JwtPayload | undefined
       ) => {
         if (error) {
-          res.status(401).json({ message: "Invalid token" });
+          return res.status(401).json({ message: "Invalid token" });
         }
 
         res.locals.id = decoded?.sub;
