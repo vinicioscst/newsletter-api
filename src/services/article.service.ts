@@ -41,25 +41,18 @@ export class ArticleService {
     }
   }
 
-  async read(
-    userId: string,
-    { page, perPage }: IPaginationParams
-  ): Promise<IPaginationResponse | undefined> {
+  async read({
+    page,
+    perPage,
+  }: IPaginationParams): Promise<IPaginationResponse | undefined> {
     try {
       const { skip, take } = createQueryPagination(page, perPage);
       const [articles, count] = await prisma.$transaction([
         prisma.article.findMany({
-          where: {
-            userId,
-          },
           skip,
           take,
         }),
-        prisma.article.count({
-          where: {
-            userId,
-          },
-        }),
+        prisma.article.count(),
       ]);
 
       return {

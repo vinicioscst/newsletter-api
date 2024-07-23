@@ -23,9 +23,8 @@ export class ArticleController {
   async read(req: Request, res: Response, next: NextFunction) {
     try {
       const { pagination } = res.locals;
-      const { id } = req.params;
 
-      const articles = await this.service.read(id, pagination);
+      const articles = await this.service.read(pagination);
 
       res.status(200).json(articles);
     } catch (error) {

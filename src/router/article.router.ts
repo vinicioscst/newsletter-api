@@ -21,8 +21,7 @@ export class ArticleRouter extends BaseRouter<ArticleController> {
     );
 
     this.router.get(
-      "/user/:id/articles",
-      validateToken,
+      "/articles",
       setPagination,
       async (req: Request, res: Response, next: NextFunction) => {
         await this.controller.read(req, res, next);

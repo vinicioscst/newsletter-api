@@ -3,9 +3,9 @@ import { BaseRouter } from "./base.router.js";
 import { UserController } from "../controllers/user.controller.js";
 import { validateRequestBody } from "../middlewares/validateRequestBody.middleware.js";
 import { userCreateSchema, userEditSchema } from "../lib/zod/user.schema.js";
-import { verifyUserByEmail } from "../middlewares/verifyUserByEmail.middleware.js";
 import { verifyUserById } from "../middlewares/verifyUserById.middleware.js";
 import { validateToken } from "../middlewares/validateToken.middleware.js";
+import { verifyIfUserAlreadyExists } from "../middlewares/verifyIfUserAlreadyExists.js";
 
 export class UserRouter extends BaseRouter<UserController> {
   constructor() {
@@ -14,8 +14,8 @@ export class UserRouter extends BaseRouter<UserController> {
 
   routes(): void {
     this.router.post(
-      "/user/create",
-      verifyUserByEmail,
+      "/user",
+      verifyIfUserAlreadyExists,
       validateRequestBody(userCreateSchema),
       async (req: Request, res: Response, next: NextFunction) => {
         await this.controller.create(req, res, next);
