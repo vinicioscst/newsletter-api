@@ -7,7 +7,7 @@ export class UserController {
     this.service = new UserService();
   }
 
-  async createUser(
+  async create(
     req: Request,
     res: Response,
     next: NextFunction
@@ -20,7 +20,7 @@ export class UserController {
     }
   }
 
-  async editUser(
+  async edit(
     req: Request,
     res: Response,
     next: NextFunction

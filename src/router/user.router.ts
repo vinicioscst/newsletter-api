@@ -18,7 +18,7 @@ export class UserRouter extends BaseRouter<UserController> {
       verifyUserByEmail,
       validateRequestBody(userCreateSchema),
       async (req: Request, res: Response, next: NextFunction) => {
-        await this.controller.createUser(req, res, next);
+        await this.controller.create(req, res, next);
       }
     );
 
@@ -28,7 +28,7 @@ export class UserRouter extends BaseRouter<UserController> {
       verifyUserById,
       validateRequestBody(userEditSchema),
       async (req: Request, res: Response, next: NextFunction) => {
-        await this.controller.editUser(req, res, next);
+        await this.controller.edit(req, res, next);
       }
     );
   }
