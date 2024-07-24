@@ -23,7 +23,7 @@ export class UserRouter extends BaseRouter<UserController> {
     );
 
     this.router.get(
-      "/user/:userId",
+      "/user/:id",
       validateToken,
       verifyUserById,
       async (req: Request, res: Response, next: NextFunction) => {
@@ -32,7 +32,7 @@ export class UserRouter extends BaseRouter<UserController> {
     );
 
     this.router.patch(
-      "/user/:userId",
+      "/user/:id",
       validateToken,
       verifyUserById,
       validateRequestBody(userEditSchema),
@@ -42,7 +42,7 @@ export class UserRouter extends BaseRouter<UserController> {
     );
 
     this.router.delete(
-      "/user/:userId",
+      "/user/:id",
       validateToken,
       verifyUserById,
       async (req: Request, res: Response, next: NextFunction) => {
