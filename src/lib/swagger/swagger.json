@@ -1,0 +1,563 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Newsletter API",
+    "description": "The Newsletter API was primarily developed for the [**Newsletter project**](https://github.com/vinicioscst/newsletter-vue), with the aim of strengthening JavaScript skills and learning new technologies such as **Vue** and **Gemini**, Google's artificial intelligence. Although initially focused on a specific project, this API can be used for any other project with a similar purpose.",
+    "contact": {
+      "email": "dev.vinicios@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "user"
+    },
+    {
+      "name": "login"
+    },
+    {
+      "name": "articles"
+    }
+  ],
+  "paths": {
+    "/api/user": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Create  user",
+        "description": "Create service's user, limited to only one",
+        "operationId": "createUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserCreateResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not possible to create another user"
+          },
+          "500": {
+            "description": "Was not possible to create an user / Internal server error"
+          }
+        }
+      }
+    },
+    "/api/user/:id": {
+      "get": {
+        "tags": ["user"],
+        "summary": "List user",
+        "operationId": "listUser",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/ invalid token"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Was not possible to list user / Internal server error"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "patch": {
+        "tags": ["user"],
+        "summary": "Update user",
+        "operationId": "updateUser",
+        "requestBody": {
+          "description": "Fields are optional",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserUpdateResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/ invalid token"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Was not possible to edit user / Internal server error"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["user"],
+        "summary": "Delete user",
+        "operationId": "removeUser",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Missing/ invalid token"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Was not possible to delete user / Internal server error"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": ["login"],
+        "summary": "Logs user into the system",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/api/articles": {
+      "post": {
+        "tags": ["articles"],
+        "summary": "Generates articles",
+        "operationId": "generateArticles",
+        "parameters": [
+          {
+            "name": "topic",
+            "in": "query",
+            "description": "Topic of the news to be generated. Choose only one",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "$ref": "#/components/schemas/ArticleQueryExample"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleCreateResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/ invalid token"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "get": {
+        "tags": ["articles"],
+        "summary": "List articles",
+        "operationId": "listArticles",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Number of current page",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Number of articles to list",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "5"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleArray"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/articles/:id": {
+      "patch": {
+        "tags": ["articles"],
+        "summary": "Update article",
+        "operationId": "updateArticle",
+        "requestBody": {
+          "description": "Fields are optional",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArticleUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/ invalid token"
+          },
+          "404": {
+            "description": "Article not found"
+          },
+          "500": {
+            "description": "Was not possible to edit article / Internal server error"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["articles"],
+        "summary": "Delete article",
+        "operationId": "removeArticle",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Missing/ invalid token"
+          },
+          "404": {
+            "description": "Article not found"
+          },
+          "500": {
+            "description": "Was not possible to delete article / Internal server error"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "e88b6607-90d2-444d-a0e4-5dbd69fd69cd"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@email.com"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-07-24T13:33:05.177Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-07-24T13:33:05.177Z"
+          }
+        }
+      },
+      "UserCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "Abcd1234%"
+          }
+        }
+      },
+      "UserCreateResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "e88b6607-90d2-444d-a0e4-5dbd69fd69cd"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-07-24T13:33:05.177Z"
+          }
+        }
+      },
+      "UserUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "newemail@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "Abcd12345%"
+          }
+        }
+      },
+      "UserUpdateResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "e88b6607-90d2-444d-a0e4-5dbd69fd69cd"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "newemail@email.com"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-07-24T13:33:05.177Z"
+          }
+        }
+      },
+      "UserLogin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "john@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "Abcd1234%"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "e88b6607-90d2-444d-a0e4-5dbd69fd69cd"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVmluw61jaW9zIENvc3RhIiwiaWF0IjoxNzIxNzk1MzI3LCJleHAiOjE3MjE3OTg5MjcsInN1YiI6IjQ3NmU1Y2NlLWUxMzMtNDZkNS1hMjcwLTA3N2U2OTRkYTJkOCJ9.unI7VrCil4hXmuwXRVNUOFFLIJGRGnrffp1mAFZjGkc"
+          }
+        }
+      },
+      "ArticleQueryExample": {
+        "type": "string",
+        "example": "tech, sports, games, music, cars, economy, cinema"
+      },
+      "ArticleCreateResponse": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 10
+          }
+        }
+      },
+      "Article": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "0076313f-9117-404f-9b84-02964c72f754"
+          },
+          "title": {
+            "type": "string",
+            "example": "Licitação de R$ 840 milhões da Saúde tem risco de superfaturamento"
+          },
+          "topic": {
+            "type": "string",
+            "example": "Saúde"
+          },
+          "subtopic": {
+            "type": "string",
+            "example": "Licitação"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2024-07-24T18:07:49.000Z"
+          },
+          "source": {
+            "type": "string",
+            "example": "UOL"
+          },
+          "url": {
+            "type": "string",
+            "example": "https://noticias.uol.com.br/colunas/aguirre-talento/2024/07/24/licitacao-de-r-840-mi-do-ministerio-da-saude-tem-risco-de-superfaturamento.htm"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true,
+            "example": "https://via.placeholder.com/600x400/263238?text=Saúde"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2024-07-24T16:08:05.466Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2024-07-24T16:08:05.466Z"
+          }
+        }
+      },
+      "ArticleArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Article"
+        }
+      },
+      "ArticleUpdate": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Licitação de R$ 840 milhões da Saúde tem risco de superfaturamento"
+          },
+          "topic": {
+            "type": "string",
+            "example": "Saúde"
+          },
+          "subtopic": {
+            "type": "string",
+            "example": "Licitação"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2024-07-24T18:07:49.000Z"
+          },
+          "source": {
+            "type": "string",
+            "example": "UOL"
+          },
+          "url": {
+            "type": "string",
+            "example": "https://noticias.uol.com.br/colunas/aguirre-talento/2024/07/24/licitacao-de-r-840-mi-do-ministerio-da-saude-tem-risco-de-superfaturamento.htm"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true,
+            "example": "https://via.placeholder.com/600x400/263238?text=Saúde"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

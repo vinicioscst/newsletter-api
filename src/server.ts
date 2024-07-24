@@ -1,11 +1,17 @@
 import "dotenv/config";
 import express, { Router } from "express";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import { readFile } from "fs/promises";
 import { ArticleRouter } from "./router/article.router.js";
 import { errorHandler } from "./helpers/errors/errorHandler.js";
 import { prisma } from "./database/prisma/prismaClient.js";
 import { UserRouter } from "./router/user.router.js";
 import { LoginRouter } from "./router/login.router.js";
+
+const swaggerConfig = JSON.parse(
+  await readFile("./src/lib/swagger/swagger.json", "utf8")
+);
 
 class ServerBootstrap {
   public app: express.Application = express();
@@ -21,6 +27,13 @@ class ServerBootstrap {
   }
 
   private middlewares() {
+    this.app.use(
+      "/api/docs",
+      cors({ origin: "*" }),
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerConfig)
+    );
+
     this.app.use(
       cors({
         origin: ["http://localhost:8000", "https://newsletter-vue.vercel.app"],
