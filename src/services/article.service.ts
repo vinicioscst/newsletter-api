@@ -6,7 +6,12 @@ import { defineEndpoint } from "../helpers/defineEndpoint.js";
 import { validateImageURL } from "../helpers/validateImageURL.js";
 import { prisma } from "../database/prisma/prismaClient.js";
 import { includeUserId } from "../helpers/includeUserId.js";
-import { articleArraySchema, TArticleEdit } from "../lib/zod/article.schema.js";
+import {
+  articleArraySchema,
+  articleResponseSchema,
+  TArticleEdit,
+  TArticleResponse,
+} from "../lib/zod/article.schema.js";
 import { AppError } from "../helpers/errors/appError.js";
 import { IPaginationParams, IPaginationResponse } from "../types/pagination.js";
 import { createQueryPagination } from "../helpers/createQueryPagination.js";
@@ -70,16 +75,19 @@ export class ArticleService {
     }
   }
 
-  async update(articleId: string, payload: TArticleEdit) {
+  async update(
+    articleId: string,
+    payload: TArticleEdit
+  ): Promise<TArticleResponse | undefined> {
     try {
-      const editedArticle = prisma.article.update({
+      const editedArticle = await prisma.article.update({
         where: {
           id: articleId,
         },
         data: payload,
       });
 
-      return editedArticle;
+      return articleResponseSchema.parse(editedArticle);
     } catch (error) {
       console.log(error);
 

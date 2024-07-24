@@ -51,6 +51,7 @@ type TArticleCreate = z.infer<typeof articleCreateSchema>;
 export {
   articleSchema,
   articleFormatSchema,
+  articleResponseSchema,
   articleArraySchema,
   articleEditSchema,
   articleCreateSchema,
