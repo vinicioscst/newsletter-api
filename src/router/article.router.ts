@@ -13,7 +13,7 @@ export class ArticleRouter extends BaseRouter<ArticleController> {
 
   routes(): void {
     this.router.post(
-      "/articles/generate",
+      "/articles",
       validateToken,
       async (req: Request, res: Response, next: NextFunction) => {
         await this.controller.create(req, res, next);
