@@ -5,6 +5,7 @@ import { validateToken } from "../middlewares/validateToken.middleware.js";
 import { validateRequestBody } from "../middlewares/validateRequestBody.middleware.js";
 import { articleEditSchema } from "../lib/zod/article.schema.js";
 import { setPagination } from "../middlewares/setPagination.middleware.js";
+import { verifyArticleById } from "../middlewares/verifyArticleById.middleware.js";
 
 export class ArticleRouter extends BaseRouter<ArticleController> {
   constructor() {
@@ -31,6 +32,7 @@ export class ArticleRouter extends BaseRouter<ArticleController> {
     this.router.patch(
       "/articles/:id",
       validateToken,
+      verifyArticleById,
       validateRequestBody(articleEditSchema),
       async (req: Request, res: Response, next: NextFunction) => {
         await this.controller.update(req, res, next);
@@ -40,6 +42,7 @@ export class ArticleRouter extends BaseRouter<ArticleController> {
     this.router.delete(
       "/articles/:id",
       validateToken,
+      verifyArticleById,
       async (req: Request, res: Response, next: NextFunction) => {
         await this.controller.update(req, res, next);
       }
