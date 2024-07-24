@@ -61,11 +61,23 @@
         }
       }
     },
-    "/api/user/:id": {
+    "/api/user/{userId}": {
       "get": {
         "tags": ["user"],
         "summary": "List user",
         "operationId": "listUser",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "A UUID string identifying this user",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -93,6 +105,18 @@
         "tags": ["user"],
         "summary": "Update user",
         "operationId": "updateUser",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "A UUID string identifying this user",
+            "required": true
+          }
+        ],
         "requestBody": {
           "description": "Fields are optional",
           "content": {
@@ -130,6 +154,18 @@
         "tags": ["user"],
         "summary": "Delete user",
         "operationId": "removeUser",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "A UUID string identifying this user",
+            "required": true
+          }
+        ],
         "responses": {
           "204": {
             "description": "No Content"
@@ -259,11 +295,23 @@
         }
       }
     },
-    "/api/articles/:id": {
+    "/api/articles/{articleId}": {
       "patch": {
         "tags": ["articles"],
         "summary": "Update article",
         "operationId": "updateArticle",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "articleId",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "A UUID string identifying this article",
+            "required": true
+          }
+        ],
         "requestBody": {
           "description": "Fields are optional",
           "content": {
@@ -301,6 +349,18 @@
         "tags": ["articles"],
         "summary": "Delete article",
         "operationId": "removeArticle",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "articleId",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "A UUID string identifying this article",
+            "required": true
+          }
+        ],
         "responses": {
           "204": {
             "description": "No Content"
