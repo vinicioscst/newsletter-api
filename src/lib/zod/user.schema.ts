@@ -5,6 +5,8 @@ const userSchema = z.object({
   name: z.string(),
   email: z.string().email(),
   password: z.string(),
+  createdAt: z.date().nullish(),
+  updatedAt: z.date().nullish(),
 });
 
 const userCreateSchema = z.object({
@@ -41,10 +43,16 @@ const UserResponseSchema = userSchema.omit({
   password: true,
 });
 
+const UserEditResponseSchema = userSchema.omit({
+  password: true,
+  createdAt: true,
+});
+
 const UserCreateResponseSchema = userSchema.omit({
   name: true,
   email: true,
   password: true,
+  updatedAt: true,
 });
 
 type TUser = z.infer<typeof userSchema>;
@@ -52,6 +60,7 @@ type TUserCreate = z.infer<typeof userCreateSchema>;
 type TUserLogin = z.infer<typeof userLoginSchema>;
 type TUserEdit = z.infer<typeof userEditSchema>;
 type TUserResponse = z.infer<typeof UserResponseSchema>;
+type TUserEditResponse = z.infer<typeof UserEditResponseSchema>;
 type TUserCreateResponse = z.infer<typeof UserCreateResponseSchema>;
 
 export {
@@ -59,11 +68,13 @@ export {
   userLoginSchema,
   userEditSchema,
   UserResponseSchema,
+  UserEditResponseSchema,
   UserCreateResponseSchema,
   TUser,
   TUserCreate,
   TUserLogin,
   TUserEdit,
   TUserResponse,
+  TUserEditResponse,
   TUserCreateResponse,
 };
