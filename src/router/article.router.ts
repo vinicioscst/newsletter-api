@@ -44,7 +44,7 @@ export class ArticleRouter extends BaseRouter<ArticleController> {
       validateToken,
       verifyArticleById,
       async (req: Request, res: Response, next: NextFunction) => {
-        await this.controller.update(req, res, next);
+        await this.controller.delete(req, res, next);
       }
     );
   }
