@@ -20,14 +20,40 @@ export class UserController {
     }
   }
 
-  async edit(
+  async read(
     req: Request,
     res: Response,
     next: NextFunction
   ): Promise<Response | undefined> {
     try {
-      const user = await this.service.edit(req.params.userId, req.body);
+      const user = await this.service.read(req.params.userId);
       return res.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async update(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | undefined> {
+    try {
+      const user = await this.service.update(req.params.userId, req.body);
+      return res.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async remove(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | undefined> {
+    try {
+      await this.service.remove(req.params.userId);
+      return res.status(204).json();
     } catch (error) {
       next(error);
     }

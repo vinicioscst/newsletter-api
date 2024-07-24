@@ -22,13 +22,31 @@ export class UserRouter extends BaseRouter<UserController> {
       }
     );
 
+    this.router.get(
+      "/user/:userId",
+      validateToken,
+      verifyUserById,
+      async (req: Request, res: Response, next: NextFunction) => {
+        await this.controller.read(req, res, next);
+      }
+    );
+
     this.router.patch(
       "/user/:userId",
       validateToken,
       verifyUserById,
       validateRequestBody(userEditSchema),
       async (req: Request, res: Response, next: NextFunction) => {
-        await this.controller.edit(req, res, next);
+        await this.controller.update(req, res, next);
+      }
+    );
+
+    this.router.delete(
+      "/user/:userId",
+      validateToken,
+      verifyUserById,
+      async (req: Request, res: Response, next: NextFunction) => {
+        await this.controller.remove(req, res, next);
       }
     );
   }

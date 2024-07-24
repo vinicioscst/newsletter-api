@@ -5,9 +5,11 @@ import {
   TUserCreate,
   UserCreateResponseSchema,
   TUserCreateResponse,
-  UserResponseSchema,
   TUserResponse,
   TUserEdit,
+  UserEditResponseSchema,
+  UserResponseSchema,
+  TUserEditResponse,
 } from "../lib/zod/user.schema.js";
 
 export class UserService {
@@ -30,7 +32,27 @@ export class UserService {
     }
   }
 
-  async edit(userId: string, payload: TUserEdit): Promise<TUserResponse> {
+  async read(userId: string): Promise<TUserResponse> {
+    try {
+      const user = await prisma.user.findFirst({
+        where: {
+          id: userId,
+        },
+      });
+
+      return UserResponseSchema.parse(user);
+    } catch (error) {
+      console.log(error);
+
+      if (error instanceof AppError) {
+        throw new AppError(error.message, error.status);
+      }
+
+      throw new AppError("Was not possible to list user", 500);
+    }
+  }
+
+  async update(userId: string, payload: TUserEdit): Promise<TUserEditResponse> {
     try {
       const updatedUser = await prisma.user.update({
         where: {
@@ -41,7 +63,7 @@ export class UserService {
         },
       });
 
-      return UserResponseSchema.parse(updatedUser);
+      return UserEditResponseSchema.parse(updatedUser);
     } catch (error) {
       console.log(error);
 
@@ -53,5 +75,21 @@ export class UserService {
     }
   }
 
-  update() {}
+  async remove(userId: string): Promise<void> {
+    try {
+      await prisma.user.delete({
+        where: {
+          id: userId,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+
+      if (error instanceof AppError) {
+        throw new AppError(error.message, error.status);
+      }
+
+      throw new AppError("Was not possible to delete user", 500);
+    }
+  }
 }
