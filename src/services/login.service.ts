@@ -7,7 +7,7 @@ import jsonwebtoken from "jsonwebtoken";
 export class LoginService {
   constructor() {}
 
-  async login(payload: TUserLogin) {
+  async login(payload: TUserLogin): Promise<{ id: string; token: string }> {
     try {
       const user: TUser | null = await searchForEmail(payload.email);
       if (!user) throw new AppError("Invalid credentials", 401);

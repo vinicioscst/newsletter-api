@@ -6,7 +6,7 @@ export async function validateToken(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<Response | undefined> {
   const { authorization } = req.headers;
   if (!authorization) return res.status(401).json({ message: "Missing token" });
 

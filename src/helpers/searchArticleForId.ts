@@ -1,7 +1,9 @@
 import { prisma } from "../database/prisma/prismaClient.js";
-import { TArticle } from "../lib/zod/article.schema.js";
+import { TArticleResponse } from "../lib/zod/article.schema.js";
 
-export async function searchArticleForId(id: string): Promise<TArticle | null> {
+export async function searchArticleForId(
+  id: string
+): Promise<TArticleResponse | null> {
   const article = await prisma.article.findFirst({
     where: {
       id,

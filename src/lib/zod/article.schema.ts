@@ -27,12 +27,6 @@ const articleArraySchema = z.array(articleResponseSchema);
 
 const articleEditSchema = articleFormatSchema.partial();
 
-const articleCreateSchema = articleSchema.omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-});
-
 const articleGenerateSchema = z.object({
   topic: z.enum([
     "tech",
@@ -51,7 +45,6 @@ type TArticleFormat = z.infer<typeof articleFormatSchema>;
 type TArticleResponse = z.infer<typeof articleResponseSchema>;
 type TArticleArray = z.infer<typeof articleArraySchema>;
 type TArticleEdit = z.infer<typeof articleEditSchema>;
-type TArticleCreate = z.infer<typeof articleCreateSchema>;
 
 export {
   articleSchema,
@@ -59,12 +52,10 @@ export {
   articleResponseSchema,
   articleArraySchema,
   articleEditSchema,
-  articleCreateSchema,
   articleGenerateSchema,
   TArticle,
   TArticleFormat,
   TArticleResponse,
   TArticleArray,
   TArticleEdit,
-  TArticleCreate,
 };

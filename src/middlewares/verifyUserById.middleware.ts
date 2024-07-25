@@ -5,7 +5,7 @@ export async function verifyUserById(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<Response | undefined> {
   const user = await searchUserForId(req.params.id);
 
   if (!user) return res.status(404).json({ message: "User not found" });

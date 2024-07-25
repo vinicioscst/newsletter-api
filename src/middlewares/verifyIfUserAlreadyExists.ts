@@ -6,7 +6,7 @@ export async function verifyIfUserAlreadyExists(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<Response | undefined> {
   try {
     const user = await prisma.user.findFirst();
 

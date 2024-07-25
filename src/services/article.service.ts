@@ -19,7 +19,10 @@ import { createQueryPagination } from "../helpers/createQueryPagination.js";
 export class ArticleService {
   constructor() {}
 
-  async create(topic: string, userId: string) {
+  async create(
+    topic: string,
+    userId: string
+  ): Promise<{ count: number } | undefined> {
     try {
       const apiUrl = defineEndpoint(topic);
       const articlesXML = await getXMLData(apiUrl);
@@ -97,9 +100,9 @@ export class ArticleService {
     }
   }
 
-  async delete(articleId: string) {
+  async delete(articleId: string): Promise<void> {
     try {
-      return await prisma.article.delete({
+      await prisma.article.delete({
         where: {
           id: articleId,
         },

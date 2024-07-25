@@ -5,7 +5,7 @@ export async function verifyArticleById(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<Response | undefined> {
   const article = await searchArticleForId(req.params.id);
 
   if (!article) return res.status(404).json({ message: "Article not found" });
