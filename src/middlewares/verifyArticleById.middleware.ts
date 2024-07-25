@@ -10,7 +10,5 @@ export async function verifyArticleById(
 
   if (!article) return res.status(404).json({ message: "Article not found" });
 
-  res.locals.foundArticle = article;
-
   next();
 }

@@ -9,7 +9,7 @@ export class LoginService {
 
   async login(payload: TUserLogin): Promise<{ id: string; token: string }> {
     try {
-      const user: TUser | null = await searchForEmail(payload.email);
+      const user: TUser | null = await searchForEmail(payload.email, true);
       if (!user) throw new AppError("Invalid credentials", 401);
 
       const passwordsMatch = await bcryptjs.compare(

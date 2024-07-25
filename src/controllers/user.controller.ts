@@ -26,7 +26,7 @@ export class UserController {
     next: NextFunction
   ): Promise<Response | undefined> {
     try {
-      const user = await this.service.read(req.params.userId);
+      const user = await this.service.read(req.params.id);
       return res.status(200).json(user);
     } catch (error) {
       next(error);
@@ -39,7 +39,7 @@ export class UserController {
     next: NextFunction
   ): Promise<Response | undefined> {
     try {
-      const user = await this.service.update(req.params.userId, req.body);
+      const user = await this.service.update(req.params.id, req.body);
       return res.status(200).json(user);
     } catch (error) {
       next(error);
@@ -52,8 +52,8 @@ export class UserController {
     next: NextFunction
   ): Promise<Response | undefined> {
     try {
-      await this.service.remove(req.params.userId);
-      return res.status(204).json();
+      const deactivatedUser = await this.service.remove(req.params.id);
+      return res.status(200).json(deactivatedUser);
     } catch (error) {
       next(error);
     }

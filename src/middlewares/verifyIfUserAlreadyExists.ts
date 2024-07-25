@@ -8,7 +8,7 @@ export async function verifyIfUserAlreadyExists(
   next: NextFunction
 ): Promise<Response | undefined> {
   try {
-    const user = await prisma.user.findFirst();
+    const user = await prisma.user.findFirst({ where: { isActive: true } });
 
     if (user) {
       return res

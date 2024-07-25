@@ -8,6 +8,7 @@ import { errorHandler } from "./helpers/errors/errorHandler.js";
 import { prisma } from "./database/prisma/prismaClient.js";
 import { UserRouter } from "./router/user.router.js";
 import { LoginRouter } from "./router/login.router.js";
+import { CronBootstrap } from "./lib/cron/cronSetup.js";
 
 const swaggerConfig = JSON.parse(
   await readFile("./src/lib/swagger/swagger.json", "utf8")
@@ -16,10 +17,12 @@ const swaggerConfig = JSON.parse(
 class ServerBootstrap {
   public app: express.Application = express();
   private port: number = Number(process.env.PORT);
+  private cron: CronBootstrap;
 
   constructor() {
     this.middlewares();
     this.routes();
+    this.cron = new CronBootstrap();
 
     this.app.use(errorHandler);
 

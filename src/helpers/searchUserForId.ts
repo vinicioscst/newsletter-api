@@ -5,6 +5,7 @@ export async function searchUserForId(id: string): Promise<TUser | null> {
   const user = await prisma.user.findFirst({
     where: {
       id,
+      isActive: true,
     },
   });
 

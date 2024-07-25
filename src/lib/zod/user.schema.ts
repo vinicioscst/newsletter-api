@@ -5,8 +5,11 @@ const userSchema = z.object({
   name: z.string(),
   email: z.string().email(),
   password: z.string(),
+  isActive: z.boolean(),
   createdAt: z.date().nullish(),
   updatedAt: z.date().nullish(),
+  deactivatedAt: z.date().nullish(),
+  deletedAt: z.date().nullish(),
 });
 
 const userCreateSchema = z.object({
@@ -45,14 +48,19 @@ const UserResponseSchema = userSchema.omit({
 
 const UserEditResponseSchema = userSchema.omit({
   password: true,
+  isActive: true,
+  createdAt: true,
+  deactivatedAt: true,
+  deletedAt: true,
+});
+
+const UserCreateResponseSchema = userSchema.pick({
+  id: true,
   createdAt: true,
 });
 
-const UserCreateResponseSchema = userSchema.omit({
-  name: true,
-  email: true,
-  password: true,
-  updatedAt: true,
+const UserDeleteResponseSchema = userSchema.pick({
+  deactivatedAt: true,
 });
 
 type TUser = z.infer<typeof userSchema>;
@@ -62,6 +70,7 @@ type TUserEdit = z.infer<typeof userEditSchema>;
 type TUserResponse = z.infer<typeof UserResponseSchema>;
 type TUserEditResponse = z.infer<typeof UserEditResponseSchema>;
 type TUserCreateResponse = z.infer<typeof UserCreateResponseSchema>;
+type TUserDeleteResponse = z.infer<typeof UserDeleteResponseSchema>;
 
 export {
   userCreateSchema,
@@ -70,6 +79,7 @@ export {
   UserResponseSchema,
   UserEditResponseSchema,
   UserCreateResponseSchema,
+  UserDeleteResponseSchema,
   TUser,
   TUserCreate,
   TUserLogin,
@@ -77,4 +87,5 @@ export {
   TUserResponse,
   TUserEditResponse,
   TUserCreateResponse,
+  TUserDeleteResponse,
 };

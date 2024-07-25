@@ -10,6 +10,8 @@ import {
   UserEditResponseSchema,
   UserResponseSchema,
   TUserEditResponse,
+  TUserDeleteResponse,
+  UserDeleteResponseSchema,
 } from "../lib/zod/user.schema.js";
 
 export class UserService {
@@ -75,13 +77,19 @@ export class UserService {
     }
   }
 
-  async remove(userId: string): Promise<void> {
+  async remove(userId: string): Promise<TUserDeleteResponse> {
     try {
-      await prisma.user.delete({
+      const user = await prisma.user.update({
         where: {
           id: userId,
         },
+        data: {
+          isActive: false,
+          deactivatedAt: new Date(),
+        },
       });
+
+      return UserDeleteResponseSchema.parse(user);
     } catch (error) {
       console.log(error);
 
