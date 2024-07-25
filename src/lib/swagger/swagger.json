@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "https://newsletter-api-fdpw.onrender.com"
     }
   ],
   "tags": [
@@ -220,18 +220,16 @@
         "tags": ["articles"],
         "summary": "Generates articles",
         "operationId": "generateArticles",
-        "parameters": [
-          {
-            "name": "topic",
-            "in": "query",
-            "description": "Topic of the news to be generated. Choose only one",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "$ref": "#/components/schemas/ArticleQueryExample"
+        "requestBody": {
+          "description": "Topic of the news to be generated. Use an empty string if you don't want to specify the topic",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArticleCreateBody"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "201": {
             "description": "Created",
@@ -504,9 +502,23 @@
           }
         }
       },
-      "ArticleQueryExample": {
-        "type": "string",
-        "example": "tech, sports, games, music, cars, economy, cinema"
+      "ArticleCreateBody": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "enum": [
+              "tech",
+              "sports",
+              "games",
+              "music",
+              "cars",
+              "economy",
+              "cinema",
+              ""
+            ]
+          }
+        }
       },
       "ArticleCreateResponse": {
         "type": "object",

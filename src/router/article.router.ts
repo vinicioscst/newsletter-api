@@ -3,7 +3,10 @@ import { ArticleController } from "../controllers/article.controller.js";
 import { BaseRouter } from "./base.router.js";
 import { validateToken } from "../middlewares/validateToken.middleware.js";
 import { validateRequestBody } from "../middlewares/validateRequestBody.middleware.js";
-import { articleEditSchema } from "../lib/zod/article.schema.js";
+import {
+  articleEditSchema,
+  articleGenerateSchema,
+} from "../lib/zod/article.schema.js";
 import { setPagination } from "../middlewares/setPagination.middleware.js";
 import { verifyArticleById } from "../middlewares/verifyArticleById.middleware.js";
 
@@ -16,6 +19,7 @@ export class ArticleRouter extends BaseRouter<ArticleController> {
     this.router.post(
       "/articles",
       validateToken,
+      validateRequestBody(articleGenerateSchema),
       async (req: Request, res: Response, next: NextFunction) => {
         await this.controller.create(req, res, next);
       }

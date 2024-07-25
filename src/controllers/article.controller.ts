@@ -9,10 +9,10 @@ export class ArticleController {
 
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const { topic } = req.query;
+      const { topic } = req.body;
       const { id } = res.locals;
 
-      const articles = await this.service.create(topic as string, id);
+      const articles = await this.service.create(topic, id);
 
       res.status(201).json(articles);
     } catch (error) {

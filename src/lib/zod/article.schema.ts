@@ -27,19 +27,24 @@ const articleArraySchema = z.array(articleResponseSchema);
 
 const articleEditSchema = articleFormatSchema.partial();
 
-const articleCreateSchema = articleSchema
-  .omit({
-    id: true,
-    createdAt: true,
-    updatedAt: true,
-  })
-  .extend({
-    user: z.object({
-      connect: z.object({
-        id: z.string(),
-      }),
-    }),
-  });
+const articleCreateSchema = articleSchema.omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+const articleGenerateSchema = z.object({
+  topic: z.enum([
+    "tech",
+    "sports",
+    "games",
+    "music",
+    "cars",
+    "economy",
+    "cinema",
+    "",
+  ]),
+});
 
 type TArticle = z.infer<typeof articleSchema>;
 type TArticleFormat = z.infer<typeof articleFormatSchema>;
@@ -55,6 +60,7 @@ export {
   articleArraySchema,
   articleEditSchema,
   articleCreateSchema,
+  articleGenerateSchema,
   TArticle,
   TArticleFormat,
   TArticleResponse,
