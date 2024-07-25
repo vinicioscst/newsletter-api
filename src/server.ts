@@ -31,7 +31,9 @@ class ServerBootstrap {
       "/api/docs",
       cors({ origin: "*" }),
       swaggerUi.serve,
-      swaggerUi.setup(swaggerConfig)
+      swaggerUi.setup(swaggerConfig, {
+        swaggerOptions: { supportedSubmitMethods: [] },
+      })
     );
 
     this.app.use(
