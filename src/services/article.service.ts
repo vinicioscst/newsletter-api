@@ -11,6 +11,7 @@ import {
   articleResponseSchema,
   TArticleEdit,
   TArticleResponse,
+  TArticleTopics,
 } from "../lib/zod/article.schema.js";
 import { AppError } from "../helpers/errors/appError.js";
 import { IPaginationParams, IPaginationResponse } from "../types/pagination.js";
@@ -69,6 +70,25 @@ export class ArticleService {
         count,
         articles: articleArraySchema.parse(articles),
       };
+    } catch (error) {
+      console.log(error);
+
+      if (error instanceof AppError) {
+        throw new AppError(error.message, error.status);
+      }
+    }
+  }
+
+  async readTopics(): Promise<TArticleTopics | undefined> {
+    try {
+      const topics = await prisma.article.findMany({
+        select: {
+          topic: true,
+        },
+        distinct: "topic",
+      });
+
+      return topics;
     } catch (error) {
       console.log(error);
 

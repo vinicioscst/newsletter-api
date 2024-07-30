@@ -22,8 +22,15 @@ const articleFormatSchema = articleSchema.omit({
 });
 
 const articleResponseSchema = articleSchema.omit({ userId: true });
+const articleCreateSchema = articleSchema.omit({
+  id: true,
+  userId: true,
+  createdAt: true,
+  updatedAt: true,
+});
 
 const articleArraySchema = z.array(articleResponseSchema);
+const articleCreateArraySchema = z.array(articleCreateSchema);
 
 const articleEditSchema = articleFormatSchema.partial();
 
@@ -40,11 +47,19 @@ const articleGenerateSchema = z.object({
   ]),
 });
 
+const articleTopicsSchema = articleSchema.pick({
+  topic: true,
+});
+
+const articleTopicsArraySchema = z.array(articleTopicsSchema);
+
 type TArticle = z.infer<typeof articleSchema>;
 type TArticleFormat = z.infer<typeof articleFormatSchema>;
 type TArticleResponse = z.infer<typeof articleResponseSchema>;
 type TArticleArray = z.infer<typeof articleArraySchema>;
 type TArticleEdit = z.infer<typeof articleEditSchema>;
+type TArticleCreateArray = z.infer<typeof articleCreateArraySchema>;
+type TArticleTopics = z.infer<typeof articleTopicsArraySchema>;
 
 export {
   articleSchema,
@@ -53,9 +68,12 @@ export {
   articleArraySchema,
   articleEditSchema,
   articleGenerateSchema,
+  articleCreateArraySchema,
   TArticle,
   TArticleFormat,
   TArticleResponse,
   TArticleArray,
   TArticleEdit,
+  TArticleCreateArray,
+  TArticleTopics,
 };

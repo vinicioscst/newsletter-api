@@ -32,6 +32,16 @@ export class ArticleController {
     }
   }
 
+  async readTopics(req: Request, res: Response, next: NextFunction) {
+    try {
+      const topics = await this.service.readTopics();
+
+      res.status(200).json(topics);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async update(req: Request, res: Response, next: NextFunction) {
     try {
       const { body } = req;
