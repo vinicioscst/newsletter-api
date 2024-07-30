@@ -1,14 +1,8 @@
-import { standardizeData } from "../helpers/geminiPrompts.js";
-import { formatGeminiResponse } from "../helpers/formatGeminiResponse.js";
-import { getXMLData } from "../helpers/getXMLData.js";
-import { parseXML } from "../helpers/parseXML.js";
-import { defineEndpoint } from "../helpers/defineEndpoint.js";
-import { validateImageURL } from "../helpers/validateImageURL.js";
 import { prisma } from "../database/prisma/prismaClient.js";
-import { includeUserId } from "../helpers/includeUserId.js";
 import {
   articleArraySchema,
   articleResponseSchema,
+  TArticleCreateArray,
   TArticleEdit,
   TArticleResponse,
   TArticleTopics,
@@ -16,6 +10,7 @@ import {
 import { AppError } from "../helpers/errors/appError.js";
 import { IPaginationParams, IPaginationResponse } from "../types/pagination.js";
 import { createQueryPagination } from "../helpers/createQueryPagination.js";
+import { createAndFormatArticles } from "../helpers/createAndFormatArticles.js";
 
 export class ArticleService {
   constructor() {}
@@ -25,18 +20,13 @@ export class ArticleService {
     userId: string
   ): Promise<{ count: number } | undefined> {
     try {
-      const apiUrl = defineEndpoint(topic);
-      const articlesXML = await getXMLData(apiUrl);
-      const parsedArticles = await parseXML(articlesXML);
-      const standardizedArticles = await standardizeData(
-        parsedArticles.slice(0, 10)
-      );
-      const formattedData = formatGeminiResponse(standardizedArticles);
-      const articlesWithValidImages = await validateImageURL(formattedData);
-      const articlesWithUserId = includeUserId(articlesWithValidImages, userId);
+      const data = (await createAndFormatArticles(
+        topic,
+        userId
+      )) as TArticleCreateArray;
 
       const articles = await prisma.article.createMany({
-        data: articlesWithUserId,
+        data,
         skipDuplicates: true,
       });
 

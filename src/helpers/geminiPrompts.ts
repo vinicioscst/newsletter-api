@@ -12,7 +12,7 @@ export async function standardizeData(
     const prompt = `Analyze the objects in the JSON array below and, based on the field names, return a JSON array with the following structure:
 
     - id (Generate a UUID type id)
-    - title (The news headline, using UTF-8 charset)
+    - title (The 'description' field in each object. Must use UTF-8 charset. Cannot be null)
     - topic (The news main subject. Must be in Portuguese)
     - subtopic (Related to the main subject. Example: E-Sports is a subtopic of Games. Must be in Portuguese)
     - publishedAt (The publication date in ISO format)
