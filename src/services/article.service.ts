@@ -48,6 +48,9 @@ export class ArticleService {
       const { skip, take } = createQueryPagination(page, perPage);
       const [articles, count] = await prisma.$transaction([
         prisma.article.findMany({
+          orderBy: {
+            publishedAt: "desc",
+          },
           skip,
           take,
         }),
