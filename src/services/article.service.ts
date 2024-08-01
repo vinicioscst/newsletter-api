@@ -51,6 +51,7 @@ export class ArticleService {
           where: {
             title: {
               contains: title,
+              mode: "insensitive",
             },
           },
           orderBy: {
