@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { ArticleService } from "../services/article.service.js";
+import { articleSearchQuerySchema } from "../lib/zod/article.schema.js";
 
 export class ArticleController {
   private service: ArticleService;
@@ -23,20 +24,13 @@ export class ArticleController {
   async read(req: Request, res: Response, next: NextFunction) {
     try {
       const { pagination } = res.locals;
+      const { title } = req.query;
 
-      const articles = await this.service.read(pagination);
+      const searchValue = articleSearchQuerySchema.parse(title);
+
+      const articles = await this.service.read(pagination, searchValue);
 
       res.status(200).json(articles);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async readTopics(req: Request, res: Response, next: NextFunction) {
-    try {
-      const topics = await this.service.readTopics();
-
-      res.status(200).json(topics);
     } catch (error) {
       next(error);
     }

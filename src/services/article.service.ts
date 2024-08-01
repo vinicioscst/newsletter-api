@@ -40,21 +40,32 @@ export class ArticleService {
     }
   }
 
-  async read({
-    page,
-    perPage,
-  }: IPaginationParams): Promise<IPaginationResponse | undefined> {
+  async read(
+    { page, perPage }: IPaginationParams,
+    title: string | undefined
+  ): Promise<IPaginationResponse | undefined> {
     try {
       const { skip, take } = createQueryPagination(page, perPage);
       const [articles, count] = await prisma.$transaction([
         prisma.article.findMany({
+          where: {
+            title: {
+              contains: title,
+            },
+          },
           orderBy: {
             publishedAt: "desc",
           },
           skip,
           take,
         }),
-        prisma.article.count(),
+        prisma.article.count({
+          where: {
+            title: {
+              contains: title,
+            },
+          },
+        }),
       ]);
 
       return {
@@ -63,25 +74,6 @@ export class ArticleService {
         count,
         articles: articleArraySchema.parse(articles),
       };
-    } catch (error) {
-      console.log(error);
-
-      if (error instanceof AppError) {
-        throw new AppError(error.message, error.status);
-      }
-    }
-  }
-
-  async readTopics(): Promise<TArticleTopics | undefined> {
-    try {
-      const topics = await prisma.article.findMany({
-        select: {
-          topic: true,
-        },
-        distinct: "topic",
-      });
-
-      return topics;
     } catch (error) {
       console.log(error);
 

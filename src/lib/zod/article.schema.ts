@@ -53,6 +53,8 @@ const articleTopicsSchema = articleSchema.pick({
 
 const articleTopicsArraySchema = z.array(articleTopicsSchema);
 
+const articleSearchQuerySchema = z.optional(z.string());
+
 type TArticle = z.infer<typeof articleSchema>;
 type TArticleFormat = z.infer<typeof articleFormatSchema>;
 type TArticleResponse = z.infer<typeof articleResponseSchema>;
@@ -69,6 +71,7 @@ export {
   articleEditSchema,
   articleGenerateSchema,
   articleCreateArraySchema,
+  articleSearchQuerySchema,
   TArticle,
   TArticleFormat,
   TArticleResponse,
