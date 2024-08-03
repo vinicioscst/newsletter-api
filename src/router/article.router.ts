@@ -33,6 +33,13 @@ export class ArticleRouter extends BaseRouter<ArticleController> {
       }
     );
 
+    this.router.get(
+      "/articles/topics",
+      async (req: Request, res: Response, next: NextFunction) => {
+        await this.controller.readTopics(req, res, next);
+      }
+    );
+
     this.router.patch(
       "/articles/:id",
       validateToken,

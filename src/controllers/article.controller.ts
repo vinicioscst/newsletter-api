@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { ArticleService } from "../services/article.service.js";
-import { articleSearchQuerySchema } from "../lib/zod/article.schema.js";
+import {
+  articleOrderQuerySchema,
+  articleSearchQuerySchema,
+} from "../lib/zod/article.schema.js";
+import { defineOrder } from "../helpers/defineOrder.js";
 
 export class ArticleController {
   private service: ArticleService;
@@ -24,13 +28,25 @@ export class ArticleController {
   async read(req: Request, res: Response, next: NextFunction) {
     try {
       const { pagination } = res.locals;
-      const { title } = req.query;
+      const { search, orderBy } = req.query;
 
-      const searchValue = articleSearchQuerySchema.parse(title);
+      const parsedSearch = articleSearchQuerySchema.parse(search);
+      const parsedOrder = articleOrderQuerySchema.parse(orderBy);
+      const order = defineOrder(parsedOrder);
 
-      const articles = await this.service.read(pagination, searchValue);
+      const articles = await this.service.read(pagination, parsedSearch, order);
 
       res.status(200).json(articles);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async readTopics(req: Request, res: Response, next: NextFunction) {
+    try {
+      const topics = await this.service.readTopics();
+
+      res.status(200).json(topics);
     } catch (error) {
       next(error);
     }

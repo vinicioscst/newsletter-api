@@ -4,7 +4,9 @@ import {
   articleResponseSchema,
   TArticleCreateArray,
   TArticleEdit,
+  TArticleDefineOrder,
   TArticleResponse,
+  TArticleSearchQuery,
   TArticleTopics,
 } from "../lib/zod/article.schema.js";
 import { AppError } from "../helpers/errors/appError.js";
@@ -42,29 +44,45 @@ export class ArticleService {
 
   async read(
     { page, perPage }: IPaginationParams,
-    title: string | undefined
+    search: TArticleSearchQuery,
+    ordernation: TArticleDefineOrder
   ): Promise<IPaginationResponse | undefined> {
     try {
       const { skip, take } = createQueryPagination(page, perPage);
       const [articles, count] = await prisma.$transaction([
         prisma.article.findMany({
           where: {
-            title: {
-              contains: title,
-              mode: "insensitive",
-            },
+            OR: [
+              {
+                title: {
+                  contains: search,
+                },
+              },
+              {
+                topic: {
+                  contains: search,
+                },
+              },
+            ],
           },
-          orderBy: {
-            publishedAt: "desc",
-          },
+          orderBy: ordernation,
           skip,
           take,
         }),
         prisma.article.count({
           where: {
-            title: {
-              contains: title,
-            },
+            OR: [
+              {
+                title: {
+                  contains: search,
+                },
+              },
+              {
+                topic: {
+                  contains: search,
+                },
+              },
+            ],
           },
         }),
       ]);
@@ -75,6 +93,25 @@ export class ArticleService {
         count,
         articles: articleArraySchema.parse(articles),
       };
+    } catch (error) {
+      console.log(error);
+
+      if (error instanceof AppError) {
+        throw new AppError(error.message, error.status);
+      }
+    }
+  }
+
+  async readTopics(): Promise<TArticleTopics | undefined> {
+    try {
+      const topics = await prisma.article.findMany({
+        select: {
+          topic: true,
+        },
+        distinct: ["topic"],
+      });
+
+      return topics;
     } catch (error) {
       console.log(error);
 

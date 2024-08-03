@@ -55,6 +55,16 @@ const articleTopicsArraySchema = z.array(articleTopicsSchema);
 
 const articleSearchQuerySchema = z.optional(z.string());
 
+const articleOrderQuerySchema = z.string().default("MaisRecente");
+
+const defineOrderPublishedAtSchema = z.object({
+  publishedAt: z.enum(["desc", "asc"]),
+});
+
+const defineOrderTitleSchema = z.object({
+  title: z.enum(["desc", "asc"]),
+});
+
 type TArticle = z.infer<typeof articleSchema>;
 type TArticleFormat = z.infer<typeof articleFormatSchema>;
 type TArticleResponse = z.infer<typeof articleResponseSchema>;
@@ -62,6 +72,10 @@ type TArticleArray = z.infer<typeof articleArraySchema>;
 type TArticleEdit = z.infer<typeof articleEditSchema>;
 type TArticleCreateArray = z.infer<typeof articleCreateArraySchema>;
 type TArticleTopics = z.infer<typeof articleTopicsArraySchema>;
+type TArticleSearchQuery = z.infer<typeof articleSearchQuerySchema>;
+type TArticleDefineOrder = z.infer<
+  typeof defineOrderPublishedAtSchema | typeof defineOrderTitleSchema
+>;
 
 export {
   articleSchema,
@@ -72,6 +86,7 @@ export {
   articleGenerateSchema,
   articleCreateArraySchema,
   articleSearchQuerySchema,
+  articleOrderQuerySchema,
   TArticle,
   TArticleFormat,
   TArticleResponse,
@@ -79,4 +94,6 @@ export {
   TArticleEdit,
   TArticleCreateArray,
   TArticleTopics,
+  TArticleSearchQuery,
+  TArticleDefineOrder,
 };
