@@ -10,7 +10,7 @@ export const setPagination = (
 
   const page: number = queryPage && queryPage > 0 ? queryPage : 1;
   const perPage: number =
-    queryPerPage && queryPerPage > 5 && queryPerPage > 0 ? queryPerPage : 5;
+    queryPerPage && queryPerPage > 4 && queryPerPage > 0 ? queryPerPage : 4;
 
   const pagination = {
     page,
