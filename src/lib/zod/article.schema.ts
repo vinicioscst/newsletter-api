@@ -5,6 +5,7 @@ const articleSchema = z.object({
   title: z.string().max(255),
   topic: z.string().max(50),
   subtopic: z.string().max(50),
+  content: z.string(),
   publishedAt: z.date().nullable(),
   source: z.string().max(50),
   url: z.string(),

@@ -21,11 +21,11 @@ export async function createAndFormatArticles(
     const articlesXML = await getXMLData(apiUrl);
     const parsedArticles = await parseXML(articlesXML);
     const standardizedArticles = await standardizeData(
-      parsedArticles.slice(0, 10)
+      parsedArticles.slice(0, 12)
     );
     const formattedData = formatGeminiResponse(standardizedArticles);
     const articlesWithValidImages = await validateImageURL(formattedData);
-    const articlesWithValidDates = await validateDate(articlesWithValidImages);
+    const articlesWithValidDates = validateDate(articlesWithValidImages);
     const articlesWithUserId = includeUserId(articlesWithValidDates, userId);
 
     const data = articleCreateArraySchema.parse(articlesWithUserId);

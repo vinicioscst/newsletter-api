@@ -15,6 +15,7 @@ export async function standardizeData(
     - title (The 'description' field in each object. Must use UTF-8 charset. Cannot be null)
     - topic (The news main subject. Must be in Portuguese)
     - subtopic (Related to the main subject. Example: E-Sports is a subtopic of Games. Must be in Portuguese)
+    - content (Based on the title, search about the content and create an small description about the article. Must be in portuguese and use UTF-8 charset)
     - publishedAt (The publication date in ISO format)
     - source (The name of the website where the news was published)
     - url (The news reference link)

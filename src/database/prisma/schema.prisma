@@ -12,6 +12,7 @@ model Article {
   title         String    @db.VarChar(255)
   topic         String    @db.VarChar(50)
   subtopic      String    @db.VarChar(50)
+  content       String
   publishedAt   DateTime? 
   source        String    @db.VarChar(50)
   url           String    
