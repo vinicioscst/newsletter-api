@@ -7,9 +7,9 @@ const parseDate = (val: string | Date) => {
 
 const userSchema = z.object({
   id: z.string(),
-  name: z.string(),
-  email: z.string().email(),
-  password: z.string(),
+  name: z.string().max(50),
+  email: z.string().email().max(60),
+  password: z.string().max(60),
   isActive: z.boolean(),
   createdAt: z
     .union([z.date(), z.string()])
