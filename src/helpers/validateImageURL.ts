@@ -8,7 +8,7 @@ export async function validateImageURL(
     articles.map(async (article: TArticleFormat) => {
       return {
         ...article,
-        image: await validator(article.image || null, article.topic),
+        image: await imageValidator(article.image || null, article.topic),
       };
     })
   );
@@ -16,7 +16,10 @@ export async function validateImageURL(
   return formattedArticles;
 }
 
-async function validator(image: string | null, topic: string): Promise<string> {
+export async function imageValidator(
+  image: string | null,
+  topic: string
+): Promise<string> {
   try {
     if (image !== null) {
       const fetchStatus = (await fetch(image)).status;

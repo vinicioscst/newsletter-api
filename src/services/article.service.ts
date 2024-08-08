@@ -8,11 +8,13 @@ import {
   TArticleResponse,
   TArticleSearchQuery,
   TArticleTopics,
+  TArticle,
 } from "../lib/zod/article.schema.js";
 import { AppError } from "../helpers/errors/appError.js";
 import { IPaginationParams, IPaginationResponse } from "../types/pagination.js";
 import { createQueryPagination } from "../helpers/createQueryPagination.js";
 import { createAndFormatArticles } from "../helpers/createAndFormatArticles.js";
+import { imageValidator } from "../helpers/validateImageURL.js";
 
 export class ArticleService {
   constructor() {}
@@ -123,8 +125,13 @@ export class ArticleService {
 
   async update(
     articleId: string,
-    payload: TArticleEdit
+    payload: TArticleEdit,
+    foundArticle: TArticle
   ): Promise<TArticleResponse | undefined> {
+    if (payload.image === null || payload.image) {
+      payload.image = await imageValidator(payload.image, payload.topic!);
+    }
+
     try {
       const editedArticle = await prisma.article.update({
         where: {

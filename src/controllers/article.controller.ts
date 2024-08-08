@@ -56,10 +56,11 @@ export class ArticleController {
     try {
       const { body } = req;
       const { id } = req.params;
+      const { article } = res.locals;
 
-      const article = await this.service.update(id, body);
+      const editedArticle = await this.service.update(id, body, article);
 
-      res.status(200).json(article);
+      res.status(200).json(editedArticle);
     } catch (error) {
       next(error);
     }
