@@ -1,18 +1,32 @@
 import { z } from "zod";
 
+const parseDate = (val: string | Date) => {
+  const parsedDate = new Date(val);
+  return isNaN(parsedDate.getTime()) ? null : parsedDate;
+};
+
 const articleSchema = z.object({
   id: z.string(),
   title: z.string().max(255),
   topic: z.string().max(50),
   subtopic: z.string().max(50),
   content: z.string(),
-  publishedAt: z.date().nullable(),
+  publishedAt: z
+    .union([z.date(), z.string()])
+    .nullable()
+    .transform((val) => (typeof val === "string" ? parseDate(val) : val)),
   source: z.string().max(50),
   url: z.string(),
   image: z.string().nullable(),
   userId: z.string(),
-  createdAt: z.date().nullish(),
-  updatedAt: z.date().nullish(),
+  createdAt: z
+    .union([z.date(), z.string()])
+    .nullish()
+    .transform((val) => (typeof val === "string" ? parseDate(val) : val)),
+  updatedAt: z
+    .union([z.date(), z.string()])
+    .nullish()
+    .transform((val) => (typeof val === "string" ? parseDate(val) : val)),
 });
 
 const articleFormatSchema = articleSchema.omit({

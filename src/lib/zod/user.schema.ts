@@ -1,15 +1,32 @@
 import { z } from "zod";
 
+const parseDate = (val: string | Date) => {
+  const parsedDate = new Date(val);
+  return isNaN(parsedDate.getTime()) ? null : parsedDate;
+};
+
 const userSchema = z.object({
   id: z.string(),
   name: z.string(),
   email: z.string().email(),
   password: z.string(),
   isActive: z.boolean(),
-  createdAt: z.date().nullish(),
-  updatedAt: z.date().nullish(),
-  deactivatedAt: z.date().nullish(),
-  deletedAt: z.date().nullish(),
+  createdAt: z
+    .union([z.date(), z.string()])
+    .nullish()
+    .transform((val) => (typeof val === "string" ? parseDate(val) : val)),
+  updatedAt: z
+    .union([z.date(), z.string()])
+    .nullish()
+    .transform((val) => (typeof val === "string" ? parseDate(val) : val)),
+  deactivatedAt: z
+    .union([z.date(), z.string()])
+    .nullish()
+    .transform((val) => (typeof val === "string" ? parseDate(val) : val)),
+  deletedAt: z
+    .union([z.date(), z.string()])
+    .nullish()
+    .transform((val) => (typeof val === "string" ? parseDate(val) : val)),
 });
 
 const userCreateSchema = z.object({
