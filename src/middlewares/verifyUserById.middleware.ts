@@ -8,7 +8,7 @@ export async function verifyUserById(
 ): Promise<Response | undefined> {
   const user = await searchUserForId(req.params.id);
 
-  if (!user) return res.status(404).json({ message: "User not found" });
+  if (!user) return res.status(404).json({ message: "Usuário não encontrado" });
 
   next();
 }

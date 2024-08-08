@@ -9,6 +9,6 @@ export async function getXMLData(url: string): Promise<AxiosPromise> {
     }
     throw new Error();
   } catch (error) {
-    throw new AppError("Was not possible to fetch RSS data", 503);
+    throw new AppError("Não foi possível buscar os dados RSS", 503);
   }
 }

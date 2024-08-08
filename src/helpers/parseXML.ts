@@ -13,6 +13,6 @@ export async function parseXML(
 
     return parsedData.rss.channel[0].item;
   } catch (error) {
-    throw new AppError("Was not possible to parse data", 500);
+    throw new AppError("Não foi possível converter os dados", 500);
   }
 }

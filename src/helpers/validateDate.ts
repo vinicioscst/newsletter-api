@@ -19,6 +19,6 @@ function validator(publishedAt: Date | null): Date | null {
     }
     return null;
   } catch (error) {
-    throw new AppError("Was not possible to fetch image", 500);
+    throw new AppError("Não foi possível validar a data", 500);
   }
 }

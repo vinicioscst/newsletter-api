@@ -10,13 +10,13 @@ export class LoginService {
   async login(payload: TUserLogin): Promise<{ id: string; token: string }> {
     try {
       const user: TUser | null = await searchForEmail(payload.email, true);
-      if (!user) throw new AppError("Invalid credentials", 401);
+      if (!user) throw new AppError("Credenciais inválidas", 401);
 
       const passwordsMatch = await bcryptjs.compare(
         payload.password,
         user.password
       );
-      if (!passwordsMatch) throw new AppError("Invalid credentials", 401);
+      if (!passwordsMatch) throw new AppError("Credenciais inválidas", 401);
 
       const token: string = jsonwebtoken.sign(
         {
@@ -34,7 +34,7 @@ export class LoginService {
         throw new AppError(error.message, error.status);
       }
 
-      throw new AppError("Was not possible to log in", 500);
+      throw new AppError("Não foi possível fazer login", 500);
     }
   }
 }

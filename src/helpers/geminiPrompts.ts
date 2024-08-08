@@ -31,6 +31,6 @@ export async function standardizeData(
 
     return result.response.text();
   } catch (error) {
-    throw new AppError("Was not possible to collect response fields", 500);
+    throw new AppError("Não foi possível coletar os campos das notícias", 500);
   }
 }

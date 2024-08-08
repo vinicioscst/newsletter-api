@@ -36,6 +36,9 @@ export async function verifyUsersToBeDeleted() {
       throw new AppError(error.message, error.status);
     }
 
-    throw new AppError("Was not possible to verify users to be deleted", 500);
+    throw new AppError(
+      "Não foi possível verificar usuário(s) para ser(em) deletado(s)",
+      500
+    );
   }
 }

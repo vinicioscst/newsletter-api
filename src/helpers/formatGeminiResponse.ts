@@ -9,6 +9,6 @@ export function formatGeminiResponse(response: string): TArticleFormat[] {
 
     return JSON.parse(format[0]);
   } catch (error) {
-    throw new AppError("Was not possible to format response", 500);
+    throw new AppError("Não foi possível formatar a resposta da IA", 500);
   }
 }

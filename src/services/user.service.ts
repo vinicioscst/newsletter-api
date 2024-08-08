@@ -30,7 +30,7 @@ export class UserService {
         throw new AppError(error.message, error.status);
       }
 
-      throw new AppError("Was not possible to create an user", 500);
+      throw new AppError("Não foi possível criar um usuário", 500);
     }
   }
 
@@ -50,7 +50,7 @@ export class UserService {
         throw new AppError(error.message, error.status);
       }
 
-      throw new AppError("Was not possible to list user", 500);
+      throw new AppError("Não foi possível listar usuário", 500);
     }
   }
 
@@ -73,7 +73,7 @@ export class UserService {
         throw new AppError(error.message, error.status);
       }
 
-      throw new AppError("Was not possible to edit user", 500);
+      throw new AppError("Não foi possível editar usuário", 500);
     }
   }
 
@@ -97,7 +97,7 @@ export class UserService {
         throw new AppError(error.message, error.status);
       }
 
-      throw new AppError("Was not possible to delete user", 500);
+      throw new AppError("Não foi possível deletar usuário", 500);
     }
   }
 }

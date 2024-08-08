@@ -8,10 +8,10 @@ export async function validateToken(
   next: NextFunction
 ): Promise<Response | undefined> {
   const { authorization } = req.headers;
-  if (!authorization) return res.status(401).json({ message: "Missing token" });
+  if (!authorization) return res.status(401).json({ message: "Token ausente" });
 
   const token = authorization.split(" ")[1];
-  if (!token) res.status(401).json({ message: "Missing token" });
+  if (!token) res.status(401).json({ message: "Token ausente" });
 
   try {
     jsonwebtoken.verify(
@@ -22,7 +22,7 @@ export async function validateToken(
         decoded: string | jsonwebtoken.JwtPayload | undefined
       ) => {
         if (error) {
-          return res.status(401).json({ message: "Invalid token" });
+          return res.status(401).json({ message: "Token inválido" });
         }
 
         res.locals.id = decoded?.sub;

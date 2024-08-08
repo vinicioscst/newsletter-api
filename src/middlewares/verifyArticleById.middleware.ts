@@ -8,7 +8,8 @@ export async function verifyArticleById(
 ): Promise<Response | undefined> {
   const article = await searchArticleForId(req.params.id);
 
-  if (!article) return res.status(404).json({ message: "Article not found" });
+  if (!article)
+    return res.status(404).json({ message: "Notícia não encontrada" });
 
   res.locals = { ...res.locals, article };
 

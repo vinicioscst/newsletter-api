@@ -9,7 +9,7 @@ export async function verifyUserByEmail(
   const user = await searchForEmail(req.body.email);
 
   if (user) {
-    return res.status(409).json({ message: "Email already in use" });
+    return res.status(409).json({ message: "Email já está em uso" });
   }
 
   next();

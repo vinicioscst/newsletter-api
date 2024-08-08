@@ -13,7 +13,7 @@ export async function verifyIfUserAlreadyExists(
     if (user) {
       return res
         .status(403)
-        .json({ message: "Not possible to create another user" });
+        .json({ message: "Não foi possível criar outro usuário" });
     }
 
     next();

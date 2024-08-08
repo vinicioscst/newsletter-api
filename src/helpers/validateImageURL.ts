@@ -36,6 +36,6 @@ export async function imageValidator(
     }
     return `https://via.placeholder.com/600x400/263238?text=${topic}`;
   } catch (error) {
-    throw new AppError("Was not possible to fetch image", 500);
+    throw new AppError("Não foi possível validar a imagem", 500);
   }
 }
