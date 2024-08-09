@@ -128,8 +128,11 @@ export class ArticleService {
     payload: TArticleEdit,
     foundArticle: TArticle
   ): Promise<TArticleResponse | undefined> {
-    if (payload.image === null || payload.image) {
-      payload.image = await imageValidator(payload.image, payload.topic!);
+    if (payload.image) {
+      payload.image = await imageValidator(
+        payload.image,
+        payload.topic || foundArticle.topic
+      );
     }
 
     try {
