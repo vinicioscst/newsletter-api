@@ -30,7 +30,9 @@ export class ArticleController {
       const { pagination } = res.locals;
       const { search, orderBy } = req.query;
 
-      const parsedSearch = articleSearchQuerySchema.parse(search);
+      let parsedSearch = articleSearchQuerySchema.parse(search);
+      if (parsedSearch === undefined) parsedSearch = "";
+
       const parsedOrder = articleOrderQuerySchema.parse(orderBy);
       const order = defineOrder(parsedOrder);
 
