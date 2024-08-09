@@ -56,6 +56,9 @@ export class UserService {
 
   async update(userId: string, payload: TUserEdit): Promise<TUserEditResponse> {
     try {
+      if (payload.password)
+        payload.password = await bcryptjs.hash(payload.password, 13);
+
       const updatedUser = await prisma.user.update({
         where: {
           id: userId,
