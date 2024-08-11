@@ -1,60 +1,99 @@
-# Newsletter (API)
+# Newsletter (API) &middot; ![Runtime: Bun](https://img.shields.io/badge/Bun-000000?logo=bun&logoColor=f5f5f5) ![Linguagem: Typescript](https://img.shields.io/badge/Typescript-3178C6?logo=typescript&logoColor=f5f5f5) ![Framework: Express](https://img.shields.io/badge/Express-f5f5f5?logo=express&logoColor=353535) ![IA: Gemini](https://img.shields.io/badge/Google_Gemini-8E75B2?logo=googlegemini&logoColor=f5f5f5)
 
-<p align="center">
-    <img src="https://img.shields.io/badge/Javascript-yellow?logo=javascript&logoColor=f5f5f5" alt="Linguagem">
-    <img src="https://img.shields.io/badge/Node%2Ejs%2020%2E11%2E1-5FA04E?logo=Node%2Ejs&logoColor=f5f5f5" alt="Runtime">
-    <img src="https://img.shields.io/badge/In%20Progress-blue" alt="Progresso">
-</p>
+> A API Newsletter foi elaborada para o [**projeto Newsletter**](https://github.com/vinicioscst/newsletter-vue), com o intuito de fortalecer os conhecimentos de Javascript/ Typescript e aprender novas tecnologias, como **Vue** e o **Gemini**, inteligência artificial da **Google**.
+>
+> [**Read in English**](README.en.md)
 
-Backend do [projeto Newsletter](https://github.com/vinicioscst/newsletter-vue).
-A API utiliza a API do Gemini (IA desenvolvida pelo Google) para coletar as 15 notícias mais relevantes do dia no país.
+## 🔗 Índice
 
-## Rota
+1. [Tecnologias](#-tecnologias)
+2. [Estrutura do projeto](#%EF%B8%8F-estrutura-do-projeto)
+3. [O uso de inteligência artificial](#-o-uso-de-intelig%C3%AAncia-artificial)
+4. [Primeiros passos](#-primeiros-passos)
+5. [Endpoints](#endpoints)
+6. [Licença](#licen%C3%A7a)
 
-<details>
-<summary>Solicitar notícias</summary>
+## 💻 Tecnologias
 
-#### `GET - /api/articles`
+- **Linguagem** - [Typescript](https://www.typescriptlang.org/)
+- **Framework** - [Express](https://expressjs.com/)
+- **Runtime** [^1] - [Bun](https://bun.sh/)
+- **Banco de dados** [^2] - [Supabase](https://supabase.com/)
+- **ORM** - [Prisma](https://www.prisma.io/)
 
-Essa é a rota que será utilizada para enviar o prompta ao Gemini. Lembre-se de que, ao clonar esse repositório, você precisa criar sua própria key da API do Gemini. [**Mais informações aqui**](https://ai.google.dev/).
+> [^1]: Se não quiser utilizar o **Bun**, basta instalar o [**Node.js**](https://nodejs.org/) a partir da versão 20 e remover o arquivo `bun.lockb`
+> [^2]: Se não quiser utilizar o **Supabase**, basta instalar o [**PostgreSQL**](https://www.postgresql.org/) e configurar seu banco de dados
 
-Exemplo de retorno:
+### **Principais bibliotecas**
 
-```javascript
-{
-  [
-    {
-      id: "57b68877-36e1-4659-8e18-54e609d2286f",
-      title:
-        "Festa em grande estilo com direito a vestido de noiva: como são os casamentos caninos na China",
-      publishedAt: "Wed, 10 Jul 2024 13:45:39 -0000",
-      source: "G1",
-      url: "https://g1.globo.com/pop-arte/pets/noticia/2024/07/10/festa-em-grande-estilo-com-direito-a-vestido-de-noiva-como-sao-os-casamentos-caninos-na-china.ghtml",
-      image:
-        "https://s2-g1.glbimg.com/ypKWhotRcG49nFOPa-nDVRTtLpA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/z/8/KlKa4DSmOia83mMv9GMw/dog4.jpg",
-    },
-    {
-      id: "9c4b7776-15f0-4e33-926b-f705c4247982",
-      title:
-        "Novo protocolo de vacinação contra Covid-19 é adotado para atender grupos prioritários em Santarém",
-      publishedAt: "Wed, 10 Jul 2024 13:44:34 -0000",
-      source: "G1",
-      url: "https://g1.globo.com/pa/santarem-regiao/noticia/2024/07/10/novo-protocolo-de-vacinacao-contra-covid-19-e-adotado-para-atender-grupos-prioritarios-em-santarem.ghtml",
-      image:
-        "https://s2-g1.glbimg.com/o-jeAF09JYS2OfH4vUUtPONARYs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/M/T/Eb7GBUTaqy5RTYWYQjeA/000-9392ej.jpg",
-    },
-    {
-      id: "6a267d29-1b87-42f8-a4b5-160c69a84811",
-      title:
-        "Grupo liderado por ex-presidente da Câmara de Muriaé que desviava dinheiro público é alvo de novos mandados",
-      publishedAt: "Wed, 10 Jul 2024 13:43:55 -0000",
-      source: "G1",
-      url: "https://g1.globo.com/mg/zona-da-mata/noticia/2024/07/10/grupo-liderado-por-ex-presidente-da-camara-de-muriae-que-desviava-dinheiro-publico-e-alvo-de-novos-mandados.ghtml",
-      image:
-        "https://s2-g1.glbimg.com/dtDXaF9nSge1OFnelf-wMEeSTNM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/F/Y/GlQWLOTxmWba4zxaRmOg/carlos-delfim.jpg",
-    },
-  ];
-}
+- [GoogleGenerativeAI](https://ai.google.dev/gemini-api/docs/quickstart?lang=node)
+- [Zod](https://zod.dev/)
+- [Axios](https://axios-http.com/)
+- [JsonWebToken](https://www.npmjs.com/package/jsonwebtoken)
+- [BcryptJs](https://www.npmjs.com/package/bcryptjs)
+- [xml2js](https://www.npmjs.com/package/xml2js)
+
+## 🗂️ Estrutura do projeto
+
+```bash
+📦 raiz-do-projeto
+├── 📁 src
+│   ├── 📁 controllers     # Onde ficam os controladores responsáveis por lidar com as requisições do cliente
+│   ├── 📁 database        # Configuração do ORM e banco de dados
+│   ├── 📁 helpers         # Contém as funções auxiliares da aplicação, utilizadas
+│   ├── 📁 lib             # Configuração de bibliotecas externas
+│   ├── 📁 middlewares     # Contém os middlewares aplicados nas rotas
+│   ├── 📁 router          # Definição das rotas e uso de seus respectivos middlewares
+│   ├── 📁 services        # É onde ficam encapsuladas as lógica de negócio da aplicação
+│   ├── 📁 types           # Contém tipagens extra de objetos
 ```
 
-</details>
+## 💡 O uso de inteligência artificial
+
+Um dos pontos principais da API é o **uso de inteligência artificial**, especificamente o Gemini Flash 1.5 na versão gratuita.
+A IA é utilizada na formatação de dados e na geração de informações com base nos mesmos.
+
+> [!NOTE]
+> O conteúdo gerado pela IA é feito com base em pesquisa, sem qualquer objetivo de se apropriar da propriedade intelectual de qualquer pessoa.
+> Além disso, seu uso é unica e exclusivamente para fins educacionais, sem qualquer atividade comercial envolvida.
+
+## 🚀 Primeiros passos
+
+```bash
+# Clone o projeto
+
+git clone https://github.com/vinicioscst/newsletter-api.git
+
+# Instale as dependências
+
+bun install ou npm install
+
+# Crie o arquivo .env e preencha os dados corretamente
+
+API_KEY=            # Insira aqui sua chave da API do Gemini
+DATABASE_URL=       # Sua string de conexão com o banco de dados. Exemplo: postgresql://USER:PASSWORD@HOST:PORT/DATABASE
+PORT=               # Porta que irá rodar a aplicação
+SECRET_KEY=         # Chave secreta para geração do token do usuário ao fazer login
+SECRET_KEY_CRON=    # Chave secreta para configuração da biblioteca Cron
+EXPIRES_IN=         # Tempo de expiração do token. Exemplo: 1h
+
+# Configure seu banco de dados
+
+bunx prisma db push ou npx prisma db push
+
+# Rode a aplicação
+
+bun run dev ou npm run dev
+```
+
+## Endpoints
+
+Para verificar todos os endpoints, corpos de requisição e respostas, [**acesse aqui**](https://newsletter-api-fdpw.onrender.com/api/docs/#/).
+
+> [!IMPORTANT]
+> Certas rotas precisam de autenticação (as que possuem cadeado). Para poder acessá-las, crie um usuário (não será possível criar outro até que o atual seja desativado), fazer login e pegar o token da resposta.
+> Para facilitar a criação do usuário, você pode usar ferramentas como o [**Insomnia**](https://insomnia.rest/) ou [**Postman**](https://www.postman.com/)
+
+## Licença
+
+Esse projeto está sob a [licença MIT](LICENSE)
