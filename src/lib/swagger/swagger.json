@@ -53,10 +53,10 @@
             }
           },
           "403": {
-            "description": "Not possible to create another user"
+            "description": "Não foi possível criar outro usuário"
           },
           "500": {
-            "description": "Was not possible to create an user / Internal server error"
+            "description": "Não foi possível criar um usuário / Internal server error"
           }
         }
       }
@@ -90,13 +90,13 @@
             }
           },
           "401": {
-            "description": "Missing/ invalid token"
+            "description": "Token ausente/ inválido"
           },
           "404": {
-            "description": "User not found"
+            "description": "Usuário não encontrado"
           },
           "500": {
-            "description": "Was not possible to list user / Internal server error"
+            "description": "Não foi possível listar usuário / Internal server error"
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -139,13 +139,13 @@
             }
           },
           "401": {
-            "description": "Missing/ invalid token"
+            "description": "Token ausente/ inválido"
           },
           "404": {
-            "description": "User not found"
+            "description": "Usuário não encontrado"
           },
           "500": {
-            "description": "Was not possible to edit user / Internal server error"
+            "description": "Não foi possível editar usuário / Internal server error"
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -171,13 +171,13 @@
             "description": "No Content"
           },
           "401": {
-            "description": "Missing/ invalid token"
+            "description": "Token ausente/ inválido"
           },
           "404": {
-            "description": "User not found"
+            "description": "Usuário não encontrado"
           },
           "500": {
-            "description": "Was not possible to delete user / Internal server error"
+            "description": "Não foi possível deletar usuário / Internal server error"
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -210,7 +210,10 @@
             }
           },
           "401": {
-            "description": "Invalid credentials"
+            "description": "Credenciais inválidas"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -242,7 +245,7 @@
             }
           },
           "401": {
-            "description": "Missing/ invalid token"
+            "description": "Token ausente/ inválido"
           },
           "500": {
             "description": "Internal server error"
@@ -332,13 +335,13 @@
             }
           },
           "401": {
-            "description": "Missing/ invalid token"
+            "description": "Token ausente/ inválido"
           },
           "404": {
-            "description": "Article not found"
+            "description": "Notícia não encontrada"
           },
           "500": {
-            "description": "Was not possible to edit article / Internal server error"
+            "description": "Não foi possível editar notícia / Internal server error"
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -364,13 +367,13 @@
             "description": "No Content"
           },
           "401": {
-            "description": "Missing/ invalid token"
+            "description": "Token ausente/ inválido"
           },
           "404": {
-            "description": "Article not found"
+            "description": "Notícia não encontrada"
           },
           "500": {
-            "description": "Was not possible to delete article / Internal server error"
+            "description": "Não foi possível deletar notícia / Internal server error"
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -548,6 +551,10 @@
             "type": "string",
             "example": "Licitação"
           },
+          "content": {
+            "type": "string",
+            "example": "Uma licitação de R$ 840 milhões lançada pelo Ministério da Saúde para compra de um medicamento tem risco de superfaturamento milionário por causa dos altos preços ofertados pelas empresas concorrentes."
+          },
           "publishedAt": {
             "type": "string",
             "format": "date-time",
@@ -601,6 +608,10 @@
           "subtopic": {
             "type": "string",
             "example": "Licitação"
+          },
+          "content": {
+            "type": "string",
+            "example": "Uma licitação de R$ 840 milhões lançada pelo Ministério da Saúde para compra de um medicamento tem risco de superfaturamento milionário por causa dos altos preços ofertados pelas empresas concorrentes."
           },
           "publishedAt": {
             "type": "string",
