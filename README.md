@@ -1,17 +1,20 @@
 # Newsletter (API) &middot; ![Runtime: Bun](https://img.shields.io/badge/Bun-000000?logo=bun&logoColor=f5f5f5) ![Linguagem: Typescript](https://img.shields.io/badge/Typescript-3178C6?logo=typescript&logoColor=f5f5f5) ![Framework: Express](https://img.shields.io/badge/Express-f5f5f5?logo=express&logoColor=353535) ![IA: Gemini](https://img.shields.io/badge/Google_Gemini-8E75B2?logo=googlegemini&logoColor=f5f5f5)
 
-> A API Newsletter foi elaborada para o [**projeto Newsletter**](https://github.com/vinicioscst/newsletter-vue), com o intuito de fortalecer os conhecimentos de Javascript/ Typescript e aprender novas tecnologias, como **Vue** e o **Gemini**, inteligência artificial da **Google**.
->
-> [**Read in English**](README.en.md)
+[**Read in English**](README.en.md)
 
 ## 🔗 Índice
 
-1. [Tecnologias](#-tecnologias)
-2. [Estrutura do projeto](#%EF%B8%8F-estrutura-do-projeto)
-3. [O uso de inteligência artificial](#-o-uso-de-intelig%C3%AAncia-artificial)
-4. [Primeiros passos](#-primeiros-passos)
-5. [Endpoints](#endpoints)
-6. [Licença](#licen%C3%A7a)
+1. [O estudo](#-o-estudo)
+2. [Tecnologias](#-tecnologias)
+3. [Estrutura do projeto](#%EF%B8%8F-estrutura-do-projeto)
+4. [O uso de inteligência artificial](#-o-uso-de-intelig%C3%AAncia-artificial)
+5. [Primeiros passos](#-primeiros-passos)
+6. [Endpoints](#endpoints)
+7. [Licença](#licen%C3%A7a)
+
+## 📙 O estudo
+
+> A API Newsletter foi elaborada para o [**projeto Newsletter**](https://github.com/vinicioscst/newsletter-vue), com o intuito de fortalecer os conhecimentos de Javascript/ Typescript e aprender novas tecnologias, como **Vue** e o **Gemini**, inteligência artificial da **Google** e, além disso, dar início a outros conhecimentos como POO e Design Patterns, especificamente o design Singleton, utilizado nas instâncias do ORM e da ferramenta Cron.
 
 ## 💻 Tecnologias
 

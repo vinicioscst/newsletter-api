@@ -1,17 +1,20 @@
 # Newsletter (API) &middot; ![Runtime: Bun](https://img.shields.io/badge/Bun-000000?logo=bun&logoColor=f5f5f5) ![Language: Typescript](https://img.shields.io/badge/Typescript-3178C6?logo=typescript&logoColor=f5f5f5) ![Framework: Express](https://img.shields.io/badge/Express-f5f5f5?logo=express&logoColor=353535) ![AI: Gemini](https://img.shields.io/badge/Google_Gemini-8E75B2?logo=googlegemini&logoColor=f5f5f5)
 
-> The Newsletter API was developed for the [**Newsletter project**](https://github.com/vinicioscst/newsletter-vue) to enhance knowledge of JavaScript/TypeScript and learn new technologies such as **Vue** and **Gemini**, Google's artificial intelligence.
->
-> [**Leia em Português**](README.md)
+**Leia em Português**](README.md)
 
 ## 🔗 Table of Contents
 
-1. [Technologies](#-technologies)
-2. [Project structure](#%EF%B8%8F-project-structure)
-3. [The use of Artificial Intelligence](#-the-use-of-artificial-intelligence)
-4. [Getting started](#-getting-started)
-5. [Endpoints](#endpoints)
-6. [License](#license)
+1. [The Study](#-the-study)
+2. [Technologies](#-technologies)
+3. [Project structure](#%EF%B8%8F-project-structure)
+4. [The use of Artificial Intelligence](#-the-use-of-artificial-intelligence)
+5. [Getting started](#-getting-started)
+6. [Endpoints](#endpoints)
+7. [License](#license)
+
+## 📙 The Study
+
+> The Newsletter API was developed for the [**Newsletter project**](https://github.com/vinicioscst/newsletter-vue) to enhance knowledge of JavaScript/TypeScript and to learn new technologies such as **Vue** and **Gemini**, Google's artificial intelligence. Additionally, it served as a starting point for other concepts such as OOP and Design Patterns, specifically the Singleton design pattern, which is used in the instances of the ORM and the Cron tool.
 
 ## 💻 Technologies
 
