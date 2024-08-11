@@ -150,6 +150,8 @@ export class ArticleService {
       if (error instanceof AppError) {
         throw new AppError(error.message, error.status);
       }
+
+      throw new AppError("Não foi possível editar notícia", 500);
     }
   }
 
@@ -166,6 +168,8 @@ export class ArticleService {
       if (error instanceof AppError) {
         throw new AppError(error.message, error.status);
       }
+
+      throw new AppError("Não foi possível deletar notícia", 500);
     }
   }
 }
