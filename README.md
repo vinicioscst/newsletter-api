@@ -14,7 +14,7 @@
 
 ## 📙 O estudo
 
-> A API Newsletter foi elaborada para o [**projeto Newsletter**](https://github.com/vinicioscst/newsletter-vue), com o intuito de fortalecer os conhecimentos de Javascript/ Typescript e aprender novas tecnologias, como **Vue** e o **Gemini**, inteligência artificial da **Google** e, além disso, dar início a outros conhecimentos como POO e Design Patterns, especificamente o design Singleton, utilizado nas instâncias do ORM e da ferramenta Cron.
+> A API Newsletter foi elaborada para o [**projeto Newsletter**](https://github.com/vinicioscst/newsletter-front), com o intuito de fortalecer os conhecimentos de Javascript/ Typescript e aprender novas tecnologias, como **Vue** e o **Gemini**, inteligência artificial da **Google** e, além disso, dar início a outros conhecimentos como POO e Design Patterns, especificamente o design Singleton, utilizado nas instâncias do ORM e da ferramenta Cron.
 
 ## 💻 Tecnologias
 
