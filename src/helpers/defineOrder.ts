@@ -1,31 +1,31 @@
-import { TArticleDefineOrder } from "../lib/zod/article.schema.js";
+import { TArticleDefineOrder } from '../lib/zod/article.schema.js'
 
 export function defineOrder(order: string): TArticleDefineOrder {
   switch (order) {
-    case "MaisRecente":
+    case 'MaisRecente':
       return {
-        publishedAt: "desc",
-      };
-      break;
-    case "MaisAntigo":
+        createdAt: 'desc'
+      }
+      break
+    case 'MaisAntigo':
       return {
-        publishedAt: "asc",
-      };
-      break;
-    case "A-Z":
+        createdAt: 'asc'
+      }
+      break
+    case 'A-Z':
       return {
-        title: "asc",
-      };
-      break;
-    case "Z-A":
+        title: 'asc'
+      }
+      break
+    case 'Z-A':
       return {
-        title: "desc",
-      };
-      break;
+        title: 'desc'
+      }
+      break
     default:
       return {
-        publishedAt: "desc",
-      };
-      break;
+        createdAt: 'desc'
+      }
+      break
   }
 }
