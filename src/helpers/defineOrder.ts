@@ -4,12 +4,12 @@ export function defineOrder(order: string): TArticleDefineOrder {
   switch (order) {
     case 'MaisRecente':
       return {
-        createdAt: 'desc'
+        createdAt: 'asc'
       }
       break
     case 'MaisAntigo':
       return {
-        createdAt: 'asc'
+        createdAt: 'desc'
       }
       break
     case 'A-Z':
