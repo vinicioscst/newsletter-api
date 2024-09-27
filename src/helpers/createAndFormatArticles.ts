@@ -28,9 +28,7 @@ export async function createAndFormatArticles(
     const articlesWithValidDates = validateDate(articlesWithValidImages)
     const articlesWithUserId = includeUserId(articlesWithValidDates, userId)
 
-    const data = articleCreateArraySchema.parse(articlesWithUserId)
-
-    return data
+    return articleCreateArraySchema.parse(articlesWithUserId)
   } catch (error) {
     console.log(error)
 
