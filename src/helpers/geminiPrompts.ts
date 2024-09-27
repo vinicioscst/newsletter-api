@@ -12,12 +12,12 @@ export async function standardizeData(
     const prompt = `Analyze the objects in the JSON array below and, based on the field names, return a JSON array with the following structure:
 
     - id (Generate a UUID type id)
-    - title (The 'description' field in each object. Must use UTF-8 charset. Cannot be null)
-    - topic (The news main subject. Must be in Portuguese)
-    - subtopic (Related to the main subject. Example: E-Sports is a subtopic of Games. Must be in Portuguese)
+    - title (The 'description' field in each object. Must use UTF-8 charset and have a maximum of 255 characters. Cannot be null)
+    - topic (The news main subject. Must be in Portuguese and have a maximum of 50 characters)
+    - subtopic (Related to the main subject. Example: E-Sports is a subtopic of Games. Must be in Portuguese and have a maximum of 50 characters)
     - content (Based on the title, search about the content and create an small description about the article. Must be in portuguese and use UTF-8 charset)
     - publishedAt (The publication date in ISO format)
-    - source (The name of the website where the news was published)
+    - source (The name of the website where the news was published and have a maximum of 50 characters)
     - url (The news reference link)
     - image (The news reference image link. Sometimes available on description field)
 
