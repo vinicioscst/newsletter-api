@@ -1,28 +1,28 @@
 export function defineEndpoint(topic: string): string {
   switch (topic) {
-    case 'tech':
-      return 'http://tecnologia.uol.com.br/ultnot/index.xml'
+    case 'brazil':
+      return 'https://g1.globo.com/rss/g1/brasil/'
       break
-    case 'sports':
-      return 'http://rss.esporte.uol.com.br/ultimas/index.xml'
+    case 'tech-and-games':
+      return 'https://g1.globo.com/rss/g1/tecnologia/'
       break
-    case 'games':
-      return 'http://rss.uol.com.br/feed/jogos.xml'
+    case 'science-and-health':
+      return 'https://g1.globo.com/rss/g1/ciencia-e-saude/'
       break
     case 'music':
-      return 'http://musica.uol.com.br/ultnot/index.xml'
-      break
-    case 'cars':
-      return 'http://rss.carros.uol.com.br/ultnot/index.xml'
+      return 'https://g1.globo.com/rss/g1/musica/'
       break
     case 'economy':
-      return 'http://rss.uol.com.br/feed/economia.xml'
+      return 'https://g1.globo.com/rss/g1/economia/'
       break
-    case 'cinema':
-      return 'http://cinema.uol.com.br/ultnot/index.xml'
+    case 'education':
+      return 'https://g1.globo.com/rss/g1/educacao/'
+      break
+    case 'pop-and-art':
+      return 'https://g1.globo.com/rss/g1/pop-arte/'
       break
     default:
-      return 'http://rss.home.uol.com.br/index.xml'
+      return 'https://g1.globo.com/rss/g1/'
       break
   }
 }

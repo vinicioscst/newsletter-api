@@ -51,13 +51,13 @@ const articleEditSchema = articleFormatSchema.partial()
 
 const articleGenerateSchema = z.object({
   topic: z.enum([
-    'tech',
-    'sports',
-    'games',
+    'brazil',
+    'tech-and-games',
+    'science-and-health',
     'music',
-    'cars',
     'economy',
-    'cinema',
+    'education',
+    'pop-and-art',
     ''
   ])
 })

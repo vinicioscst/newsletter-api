@@ -511,13 +511,13 @@
           "topic": {
             "type": "string",
             "enum": [
-              "tech",
-              "sports",
-              "games",
+              "brazil",
+              "tech-and-games",
+              "science-and-health",
               "music",
-              "cars",
               "economy",
-              "cinema",
+              "education",
+              "pop-and-art",
               ""
             ]
           }
