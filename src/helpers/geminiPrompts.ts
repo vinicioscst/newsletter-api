@@ -1,9 +1,9 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { AppError } from "./errors/appError.js";
-import { IResponseArticle } from "../types/xmlResponse.js";
+import { GoogleGenerativeAI } from '@google/generative-ai'
+import { AppError } from './errors/appError.js'
+import { IResponseArticle } from '../types/xmlResponse.js'
 
-const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const genAI = new GoogleGenerativeAI(process.env.API_KEY!)
+const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
 
 export async function standardizeData(
   responseArray: IResponseArticle[]
@@ -23,14 +23,14 @@ export async function standardizeData(
 
     The array: 
     ${JSON.stringify(responseArray)}
-    `;
+    `
 
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(prompt)
 
-    if (result.response.text() === undefined) throw new Error();
+    if (result.response.text() === undefined) throw new Error()
 
-    return result.response.text();
+    return result.response.text()
   } catch (error) {
-    throw new AppError("Não foi possível coletar os campos das notícias", 500);
+    throw new AppError('Não foi possível coletar os campos das notícias', 500)
   }
 }

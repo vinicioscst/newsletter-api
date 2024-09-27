@@ -1,24 +1,24 @@
-import { TArticleFormat } from "../lib/zod/article.schema.js";
-import { AppError } from "./errors/appError.js";
+import { TArticleFormat } from '../lib/zod/article.schema.js'
+import { AppError } from './errors/appError.js'
 
 export function validateDate(articles: TArticleFormat[]): TArticleFormat[] {
   const formattedArticles = articles.map((article: TArticleFormat) => {
     return {
       ...article,
-      publishedAt: validator(article.publishedAt || null),
-    };
-  });
+      publishedAt: validator(article.publishedAt || null)
+    }
+  })
 
-  return formattedArticles;
+  return formattedArticles
 }
 
 function validator(publishedAt: Date | null): Date | null {
   try {
     if (publishedAt !== null) {
-      return new Date(publishedAt);
+      return new Date(publishedAt)
     }
-    return null;
+    return null
   } catch (error) {
-    throw new AppError("Não foi possível validar a data", 500);
+    throw new AppError('Não foi possível validar a data', 500)
   }
 }

@@ -1,4 +1,4 @@
-import { IQueryPagination } from "../types/pagination.js";
+import { IQueryPagination } from '../types/pagination.js'
 
 export function createQueryPagination(
   page: number,
@@ -6,8 +6,8 @@ export function createQueryPagination(
 ): IQueryPagination {
   const pagination = {
     skip: (Number(page) - 1) * Number(perPage),
-    take: Number(perPage),
-  };
+    take: Number(perPage)
+  }
 
-  return pagination;
+  return pagination
 }

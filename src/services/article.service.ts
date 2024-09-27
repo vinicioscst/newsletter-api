@@ -1,4 +1,4 @@
-import { prisma } from "../database/prisma/prismaClient.js";
+import { prisma } from '../database/prisma/prismaClient.js'
 import {
   articleArraySchema,
   articleResponseSchema,
@@ -8,13 +8,13 @@ import {
   TArticleResponse,
   TArticleSearchQuery,
   TArticleTopics,
-  TArticle,
-} from "../lib/zod/article.schema.js";
-import { AppError } from "../helpers/errors/appError.js";
-import { IPaginationParams, IPaginationResponse } from "../types/pagination.js";
-import { createQueryPagination } from "../helpers/createQueryPagination.js";
-import { createAndFormatArticles } from "../helpers/createAndFormatArticles.js";
-import { imageValidator } from "../helpers/validateImageURL.js";
+  TArticle
+} from '../lib/zod/article.schema.js'
+import { AppError } from '../helpers/errors/appError.js'
+import { IPaginationParams, IPaginationResponse } from '../types/pagination.js'
+import { createQueryPagination } from '../helpers/createQueryPagination.js'
+import { createAndFormatArticles } from '../helpers/createAndFormatArticles.js'
+import { imageValidator } from '../helpers/validateImageURL.js'
 
 export class ArticleService {
   constructor() {}
@@ -27,19 +27,19 @@ export class ArticleService {
       const data = (await createAndFormatArticles(
         topic,
         userId
-      )) as TArticleCreateArray;
+      )) as TArticleCreateArray
 
       const articles = await prisma.article.createMany({
         data,
-        skipDuplicates: true,
-      });
+        skipDuplicates: true
+      })
 
-      return articles;
+      return articles
     } catch (error) {
-      console.log(error);
+      console.log(error)
 
       if (error instanceof AppError) {
-        throw new AppError(error.message, error.status);
+        throw new AppError(error.message, error.status)
       }
     }
   }
@@ -50,56 +50,56 @@ export class ArticleService {
     ordernation: TArticleDefineOrder
   ): Promise<IPaginationResponse | undefined> {
     try {
-      const { skip, take } = createQueryPagination(page, perPage);
+      const { skip, take } = createQueryPagination(page, perPage)
       const [articles, count] = await prisma.$transaction([
         prisma.article.findMany({
           where: {
             OR: [
               {
                 title: {
-                  contains: search,
-                },
+                  contains: search
+                }
               },
               {
                 topic: {
-                  contains: search,
-                },
-              },
-            ],
+                  contains: search
+                }
+              }
+            ]
           },
           orderBy: ordernation,
           skip,
-          take,
+          take
         }),
         prisma.article.count({
           where: {
             OR: [
               {
                 title: {
-                  contains: search,
-                },
+                  contains: search
+                }
               },
               {
                 topic: {
-                  contains: search,
-                },
-              },
-            ],
-          },
-        }),
-      ]);
+                  contains: search
+                }
+              }
+            ]
+          }
+        })
+      ])
 
       return {
         prevPage: page <= 1 ? null : page - 1,
         nextPage: count - (page - 1) * perPage <= perPage ? null : page + 1,
         count,
-        articles: articleArraySchema.parse(articles),
-      };
+        articles: articleArraySchema.parse(articles)
+      }
     } catch (error) {
-      console.log(error);
+      console.log(error)
 
       if (error instanceof AppError) {
-        throw new AppError(error.message, error.status);
+        throw new AppError(error.message, error.status)
       }
     }
   }
@@ -108,17 +108,17 @@ export class ArticleService {
     try {
       const topics = await prisma.article.findMany({
         select: {
-          topic: true,
+          topic: true
         },
-        distinct: ["topic"],
-      });
+        distinct: ['topic']
+      })
 
-      return topics;
+      return topics
     } catch (error) {
-      console.log(error);
+      console.log(error)
 
       if (error instanceof AppError) {
-        throw new AppError(error.message, error.status);
+        throw new AppError(error.message, error.status)
       }
     }
   }
@@ -132,26 +132,26 @@ export class ArticleService {
       payload.image = await imageValidator(
         payload.image,
         payload.topic || foundArticle.topic
-      );
+      )
     }
 
     try {
       const editedArticle = await prisma.article.update({
         where: {
-          id: articleId,
+          id: articleId
         },
-        data: payload,
-      });
+        data: payload
+      })
 
-      return articleResponseSchema.parse(editedArticle);
+      return articleResponseSchema.parse(editedArticle)
     } catch (error) {
-      console.log(error);
+      console.log(error)
 
       if (error instanceof AppError) {
-        throw new AppError(error.message, error.status);
+        throw new AppError(error.message, error.status)
       }
 
-      throw new AppError("Não foi possível editar notícia", 500);
+      throw new AppError('Não foi possível editar notícia', 500)
     }
   }
 
@@ -159,17 +159,17 @@ export class ArticleService {
     try {
       await prisma.article.delete({
         where: {
-          id: articleId,
-        },
-      });
+          id: articleId
+        }
+      })
     } catch (error) {
-      console.log(error);
+      console.log(error)
 
       if (error instanceof AppError) {
-        throw new AppError(error.message, error.status);
+        throw new AppError(error.message, error.status)
       }
 
-      throw new AppError("Não foi possível deletar notícia", 500);
+      throw new AppError('Não foi possível deletar notícia', 500)
     }
   }
 }

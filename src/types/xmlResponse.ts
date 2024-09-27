@@ -1,27 +1,27 @@
 export interface IResponseArticle {
-  title: string[];
-  link: string[];
-  guid: Guid[];
-  description: string[];
-  "media:content": MediaContent[];
-  category: string[];
-  pubDate: string[];
+  title: string[]
+  link: string[]
+  guid: Guid[]
+  description: string[]
+  'media:content': MediaContent[]
+  category: string[]
+  pubDate: string[]
 }
 
 interface Guid {
-  _: string;
-  $: Permalink;
+  _: string
+  $: Permalink
 }
 
 interface Permalink {
-  isPermaLink: string;
+  isPermaLink: string
 }
 
 interface MediaContent {
-  $: ImageInfo;
+  $: ImageInfo
 }
 
 interface ImageInfo {
-  url: string;
-  medium: string;
+  url: string
+  medium: string
 }

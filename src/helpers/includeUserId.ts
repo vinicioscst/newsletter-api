@@ -1,12 +1,12 @@
-import { TArticleFormat } from "../lib/zod/article.schema.js";
+import { TArticleFormat } from '../lib/zod/article.schema.js'
 
 export function includeUserId(articles: TArticleFormat[], userId: string) {
   const articlesWithUserId = articles.map((article: TArticleFormat) => {
     return {
       ...article,
-      userId,
-    };
-  });
+      userId
+    }
+  })
 
-  return articlesWithUserId;
+  return articlesWithUserId
 }

@@ -1,10 +1,10 @@
-import { NextFunction, Request, Response } from "express";
-import { UserService } from "../services/user.service.js";
+import { NextFunction, Request, Response } from 'express'
+import { UserService } from '../services/user.service.js'
 
 export class UserController {
-  private service: UserService;
+  private service: UserService
   constructor() {
-    this.service = new UserService();
+    this.service = new UserService()
   }
 
   async create(
@@ -13,10 +13,10 @@ export class UserController {
     next: NextFunction
   ): Promise<Response | undefined> {
     try {
-      const user = await this.service.create(req.body);
-      return res.status(201).json(user);
+      const user = await this.service.create(req.body)
+      return res.status(201).json(user)
     } catch (error) {
-      next(error);
+      next(error)
     }
   }
 
@@ -26,10 +26,10 @@ export class UserController {
     next: NextFunction
   ): Promise<Response | undefined> {
     try {
-      const user = await this.service.read(req.params.id);
-      return res.status(200).json(user);
+      const user = await this.service.read(req.params.id)
+      return res.status(200).json(user)
     } catch (error) {
-      next(error);
+      next(error)
     }
   }
 
@@ -39,10 +39,10 @@ export class UserController {
     next: NextFunction
   ): Promise<Response | undefined> {
     try {
-      const user = await this.service.update(req.params.id, req.body);
-      return res.status(200).json(user);
+      const user = await this.service.update(req.params.id, req.body)
+      return res.status(200).json(user)
     } catch (error) {
-      next(error);
+      next(error)
     }
   }
 
@@ -52,10 +52,10 @@ export class UserController {
     next: NextFunction
   ): Promise<Response | undefined> {
     try {
-      const deactivatedUser = await this.service.remove(req.params.id);
-      return res.status(200).json(deactivatedUser);
+      const deactivatedUser = await this.service.remove(req.params.id)
+      return res.status(200).json(deactivatedUser)
     } catch (error) {
-      next(error);
+      next(error)
     }
   }
 }
