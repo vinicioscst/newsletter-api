@@ -8,7 +8,8 @@
     "build": "tsc",
     "generate": "bunx prisma generate",
     "dev": "tsx watch ./src/server.ts",
-    "start": "node ./dist/server.js"
+    "start": "node ./dist/server.js",
+    "prettier:format": "bun prettier --write 'src/**/*.{js,jsx,ts,tsx,vue}'"
   },
   "author": "",
   "license": "ISC",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@types/node": "^20.14.9",
     "@types/xml2js": "^0.4.14",
+    "prettier": "3.3.3",
     "tsx": "^4.15.7",
     "typescript": "^5.5.2"
   },
