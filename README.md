@@ -21,11 +21,12 @@
 - **Linguagem** - [Typescript](https://www.typescriptlang.org/)
 - **Framework** - [Express](https://expressjs.com/)
 - **Runtime** [^1] - [Bun](https://bun.sh/)
-- **Banco de dados** [^2] - [Supabase](https://supabase.com/)
+- **Banco de dados** [^2] - [Docker](https://www.docker.com)
 - **ORM** - [Prisma](https://www.prisma.io/)
 
 > [^1]: Se não quiser utilizar o **Bun**, basta instalar o [**Node.js**](https://nodejs.org/) a partir da versão 20 e remover o arquivo `bun.lockb`
-> [^2]: Se não quiser utilizar o **Supabase**, basta instalar o [**PostgreSQL**](https://www.postgresql.org/) e configurar seu banco de dados
+>
+> [^2]: Se não quiser utilizar o **Docker**, você pode usar algum serviço gratuito, como o [Supabase](https://supabase.com)
 
 ### **Principais bibliotecas**
 
@@ -71,10 +72,14 @@ git clone https://github.com/vinicioscst/newsletter-api.git
 
 bun install ou npm install
 
+# Configurar o banco de dados com o Docker (ignorar se estiver usando outro serviço)
+
+docker-compose up -d
+
 # Crie o arquivo .env e preencha os dados corretamente
 
 API_KEY=            # Insira aqui sua chave da API do Gemini
-DATABASE_URL=       # Sua string de conexão com o banco de dados. Exemplo: postgresql://USER:PASSWORD@HOST:PORT/DATABASE
+DATABASE_URL=       # Sua string de conexão com o banco de dados. Exemplo: postgresql://docker:docker@localhost:5432/newsletter_db
 PORT=               # Porta que irá rodar a aplicação
 SECRET_KEY=         # Chave secreta para geração do token do usuário ao fazer login
 SECRET_KEY_CRON=    # Chave secreta para configuração da biblioteca Cron
